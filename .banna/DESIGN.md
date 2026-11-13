@@ -39,7 +39,7 @@ flowchart LR
 1. **کانفیگ** `.banna/config.yaml`: مسیرها، areaها، کاتالوگ مدل‌ها، مدل هر مرحله به‌ازای سختی، دستور تست‌ها، قوانین freeze، archive. هر اسکیل در شروع آن را می‌خواند و اگر نبود متوقف می‌شود.
 2. **مدل برای هر تسک:** `banna-draft` به هر تسک `Difficulty: S|M|L` و `Model:` می‌دهد (اولین مدل مجاز و در دسترس در `stages`). `banna-build` هر تسک را در subagent با همان مدل اجرا می‌کند. بعد از دو شکست یکسان، تسک یک tier بالا می‌رود و ریشه‌یابی با `root_cause` انجام می‌شود.
 3. **تست‌اول و freeze:** از نسخه‌ی خودت (کامیت red، `/commit`، squash، `/run-app`، تسک‌های موازی). افزوده: تست‌ها را تو تأیید می‌کنی و freeze می‌شوند (`scripts/check-frozen.sh`). تست fail یعنی کد را درست کن. تغییر تست فقط با تأیید صریح تو و کامیت جدا (`test(amend)`).
-4. **Record:** سندهای دانش (adr، conventions، `CONTEXT.md`، `stack.md`) در `docs` همان area (`backend/docs`، `frontend/docs`) نوشته می‌شوند و یک‌خطی‌شان به `CLAUDE.md` همان area اضافه می‌شود. فقط چیز بین‌سرویسی در `docs` ریشه می‌رود. قوانین ADR از vanenshi بدون تغییر.
+4. **Record:** سندهای دانش (adr، conventions، `CONTEXT.md`، `stack.md`) در `docs` همان area (`api/docs`، `web/docs`) نوشته می‌شوند و یک‌خطی‌شان به `CLAUDE.md` همان area اضافه می‌شود. فقط چیز بین‌سرویسی در `docs` ریشه می‌رود. قوانین ADR از vanenshi بدون تغییر.
 5. **شناسه پلن:** `YYYY-MM-DD-NNN-<slug>.md`، `NNN` شماره‌ی پلن در همان روز (`001`، `002`، …). شناسه = تاریخ + `NNN`، مثل `2026-11-13-001`. هرگز دوباره استفاده نمی‌شود.
 6. **archive:** `.banna/plans/archive/<yyyy-mm>/` و `.banna/handoffs/archive/<yyyy-mm>/`. `banna-build` پلن done را خودش منتقل می‌کند و `banna-archive` جاروی دستی است.
 

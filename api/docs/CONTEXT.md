@@ -1,4 +1,4 @@
-# Backend
+# API
 
 The Django API behind the author's local admin app and the static public site. It stores the portfolio and blog content and serves it two ways: to the author, and to the site build.
 
@@ -49,7 +49,7 @@ The single Content item describing the Author (name, headline, summary, email, l
 _Avoid_: About, bio, resume
 
 **Skill group**:
-A titled, ordered set of skills (for example "Backend & Web"); each skill has a single name that is the same in every Locale.
+A titled, ordered set of skills (for example "Backend & Web" on the resume); each skill has a single name that is the same in every Locale.
 _Avoid_: Category, skill set, tech stack
 
 **Experience**:

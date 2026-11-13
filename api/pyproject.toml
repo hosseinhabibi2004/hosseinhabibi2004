@@ -1,5 +1,5 @@
 [project]
-name = "backend"
+name = "api"
 version = "0.0.0"
 description = "Django API: content for the static site and the author's admin screens"
 requires-python = ">=3.12"

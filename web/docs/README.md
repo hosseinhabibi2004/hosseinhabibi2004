@@ -1,4 +1,4 @@
-# Frontend
+# Web
 
 Next.js (App Router) static export. Everything the visitor sees is HTML built
 ahead of time; the Django API is read once, during `next build`.
@@ -6,7 +6,7 @@ ahead of time; the Django API is read once, during `next build`.
 ## Run it
 
 ```bash
-cd frontend
+cd web
 pnpm install
 pnpm dev                       # http://localhost:3000 -> /en/
 pnpm build                     # writes the static site to out/
@@ -32,7 +32,7 @@ src/app/robots.ts, sitemap.ts
 src/i18n/             next-i18next config; locales/<lng>/<namespace>.json
 src/lib/locale.ts     locales, default locale, text direction (pure)
 src/lib/site.ts       absolute URLs (reads env)
-src/api/backend/      SDK generated from the Django OpenAPI document
+src/sdk/              SDK generated from the Django OpenAPI document
 ```
 
 ## Not carried over

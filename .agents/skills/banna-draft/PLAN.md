@@ -3,7 +3,7 @@ status: draft # draft -> approved -> done
 id: YYYY-MM-DD-NNN # the date plus the plan's number within that day; matches the file name
 date: YYYY-MM-DD
 adr: none # none | required | NNNN (set to the committed ADR number once written)
-record: [] # docs this plan expects to write, as <area>/<kind>, e.g. [backend/adr, frontend/conventions]
+record: [] # docs this plan expects to write, as <area>/<kind>, e.g. [api/adr, web/conventions]
 skills: [] # skills /banna-build should preload, e.g. [coding-standards, ui-testing]
 execution_model: sonnet # the strongest model any task uses (per-task models are in §3): haiku | sonnet | opus
 execution_effort: medium # recommended reasoning effort: low | medium | high

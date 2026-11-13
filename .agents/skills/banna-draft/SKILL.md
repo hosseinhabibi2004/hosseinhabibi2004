@@ -96,8 +96,8 @@ context — follow it. The two policies:
   `${CLAUDE_SKILL_DIR}/../banna-handoff/SKILL.md` for the mechanics (target, template,
   file contents) rather than reinventing them here — with `target:` naming the repo
   that must act on it. List every handoff you write in the plan's `handoffs:`
-  frontmatter. If this plan **consumes** the sibling's output (e.g. a frontend plan
-  needing a new backend API), say so in §1: the requester passes the handoff's absolute
+  frontmatter. If this plan **consumes** the sibling's output (e.g. a web plan
+  needing a new API), say so in §1: the requester passes the handoff's absolute
   path to a session in the target repo, which plans and executes it **first** —
   `/banna-build` will refuse to run this plan while any listed handoff is not `done`.
 

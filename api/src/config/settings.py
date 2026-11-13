@@ -216,7 +216,7 @@ REST_FRAMEWORK = {
 API_DOCS_ENABLED = config("API_DOCS_ENABLED", cast=bool, default=DEBUG)
 
 SPECTACULAR_SETTINGS = {
-    "TITLE": "Backend API",
+    "TITLE": "API",
     "DESCRIPTION": "Content API read by the static site at build time",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,

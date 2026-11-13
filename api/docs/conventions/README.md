@@ -1,6 +1,6 @@
-# Backend conventions
+# API conventions
 
-Rules for `backend/src/`. IDs are append-only: a new rule takes the next free
+Rules for `api/src/`. IDs are append-only: a new rule takes the next free
 number, and a removed rule's number retires with it. The checks that always
 apply: `uv run ruff check .`, `uv run ruff format --check .`, `uv run ty check`
 (0 errors) and `uv run pytest`.

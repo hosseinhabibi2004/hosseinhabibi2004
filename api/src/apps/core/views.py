@@ -52,9 +52,9 @@ class DocsGateMixin:
 
 
 class SchemaView(DocsGateMixin, SpectacularAPIView):
-    """The OpenAPI document the frontend SDK is generated from."""
+    """The OpenAPI document the web and admin SDKs are generated from."""
 
-    custom_settings = MappingProxyType({"TITLE": "Backend API"})
+    custom_settings = MappingProxyType({"TITLE": "API"})
 
 
 class PublicSchemaView(DocsGateMixin, SpectacularAPIView):

@@ -111,8 +111,8 @@ e2e → unit).
 - **Commit them alone**, no implementation in the same commit: e.g.
   `test(catalog): add failing tests for the two-level category rule`. Do not tick any
   section 3 checkbox for a test commit — tests are not the task.
-- **Both sides.** Backend and frontend groups each get their own red commit, run with that
-  side's runner from that side's directory.
+- **Every area.** Each area with tests (for example `api`, `web`, `admin`) gets its own red
+  commit, run with that area's runner from that area's directory.
 - **No test setup for the touched area?** Do not invent a framework mid-plan. Say so
   explicitly, skip the red commit and the freeze for that group, and fall back to step 8's
   other verification. If the plan's section 4 named tests that the project can't run, that is

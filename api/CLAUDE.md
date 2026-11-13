@@ -1,4 +1,4 @@
-# Working in `backend/`
+# Working in `api/`
 
 Django + DRF, API only (no Django admin). Read before changing code here:
 

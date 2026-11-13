@@ -1,10 +1,10 @@
-# Backend
+# API
 
 Django + DRF. It serves the **API** behind the author's own admin screens (where
 content is written) and a read-only **content API** the static site reads once,
 at build time. It runs on the author's machine; the public site is a static
 export and never calls it at runtime. **There is no Django admin** (it is not
-a delivery surface): every screen is a real frontend page over this API.
+a delivery surface): every screen is a real web or admin page over this API.
 
 Layout follows the author's other Django projects: `src/config` (settings, urls,
 wsgi/asgi), `src/apps/<app>` (one folder per app), `src/apps/core` (shared
@@ -14,7 +14,7 @@ redaction, health and schema views), `src/apps/users` (custom user model).
 ## Run it
 
 ```bash
-cd backend
+cd api
 cp .env.example .env          # SECRET_KEY is generated on first run when empty
 uv sync
 uv run python manage.py migrate
@@ -33,10 +33,10 @@ uv run pytest
 
 ## Notes
 
-- **Database:** SQLite at `backend/db.sqlite3` by default. The content lives
+- **Database:** SQLite at `api/db.sqlite3` by default. The content lives
   only there, not in git: back it up. `DATABASE_URL=postgres://…` switches to
   PostgreSQL with no code change.
-- **Uploads:** `backend/media/`, also outside git.
+- **Uploads:** `api/media/`, also outside git.
 - **API:** every response is the envelope `{success, message, result, meta}`.
   A view that names no `permission_classes` answers 403 (`DenyAll`); the public
   content endpoints will name `AllowAny` on purpose.

@@ -11,8 +11,8 @@ paths:
 plan_id_digits: 3
 
 areas:                                # each area keeps its own knowledge docs next to its code
-  backend:  { code: backend/,  docs: backend/docs }
-  frontend: { code: frontend/, docs: frontend/docs }
+  api:      { code: api/,      docs: api/docs }
+  web:      { code: web/,      docs: web/docs }
   admin:    { code: admin/,    docs: admin/docs }     # the author's local screens, never deployed
   root:     { code: ".",       docs: docs }          # cross-service only: API contract, deploy, constitution
 
@@ -53,8 +53,8 @@ selection:
 tests:
   freeze: true                        # tests are frozen once approved; code changes, tests do not
   commands:
-    backend:  "cd backend && uv run pytest"
-    frontend: "cd frontend && pnpm test"
+    api:      "cd api && uv run pytest"
+    web:      "cd web && pnpm test"
     admin:    "cd admin && pnpm test"
   order: [contract, integration, e2e, unit]
   forbid_in_frozen: [skip, xfail, only, snapshot-update]

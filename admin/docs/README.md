@@ -7,18 +7,18 @@ machine. There is no Django admin: this is the admin.
 ## Run it
 
 ```bash
-cd backend && uv run python manage.py runserver        # API on :8000
+cd api && uv run python manage.py runserver        # API on :8000
 cd admin && pnpm install && pnpm dev                    # this app on :3001
 ```
 
-`pnpm generate:api` regenerates the SDK from the running backend.
+`pnpm generate:api` regenerates the SDK from the running API.
 
 ## How it signs in
 
 Session cookie plus CSRF. The browser treats `localhost:3001` and
 `localhost:8000` as the same site, so the API's session cookie travels with every
 call (`credentials: "include"`). Unsafe requests carry the CSRF token in
-`X-CSRFToken`. The backend's `CORS_ALLOWED_ORIGINS` and `CSRF_TRUSTED_ORIGINS`
+`X-CSRFToken`. The API's `CORS_ALLOWED_ORIGINS` and `CSRF_TRUSTED_ORIGINS`
 list `http://localhost:3001`.
 
 ## Not here
