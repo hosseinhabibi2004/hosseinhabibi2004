@@ -7,7 +7,7 @@ Next.js app that runs **only on the author's machine** (`pnpm dev`, port 3001).
 It is never exported or deployed, and the public site (`web/`) never
 contains it. It talks to the Django API with a session cookie.
 
-- `pnpm lint`, `pnpm test` and `pnpm build` pass before a change is done. Node 24.
+- `pnpm lint`, `pnpm typecheck`, `pnpm test` and `pnpm build` pass before a change is done. Node 24.
 - Signing in: `loadCsrfToken()`, then `Auth.authLogin`, then `setCsrfToken` with
   the token it returns (`src/sdk/session.ts`). Import that module once,
   at the root, so the CSRF interceptor is registered.
@@ -15,5 +15,10 @@ contains it. It talks to the Django API with a session cookie.
   document: run the API, then `pnpm generate:api`. Never hand-edit it. Every
   response is the envelope `{success, message, result, meta}`; the payload is
   `data.result`.
-- Docs for this area live in [`docs/`](docs/README.md).
+- Docs for this area live in [`docs/`](docs/README.md):
+  - [`docs/CONTEXT.md`](docs/CONTEXT.md) — the terms: interface language, content locale, shell, trash.
+  - [`docs/conventions/`](docs/conventions/README.md) — colours from tokens only, logical (RTL-safe)
+    utilities, a story per component, strings in `en` and `fa`, one folder per screen.
+  - [`docs/stack.md`](docs/stack.md) — commands, fonts, the cookie language, the Markdown editor.
+- `pnpm storybook` shows every component; its toolbar flips English (LTR) and Persian (RTL).
 - Non-trivial changes: `/banna-draft`, approval, then `/banna-build`.

@@ -127,7 +127,7 @@ export function PostForm({ post }: { post?: Post }) {
       <Tabs value={tab} onValueChange={(next) => setTab(next as Locale)}>
         <TabsList aria-label={t("form.tabs")}>
           {LOCALES.map((locale) => (
-            <TabsTrigger key={locale} value={locale} className="gap-2">
+            <TabsTrigger key={locale} value={locale} className="gap-2 data-active:[&_[data-slot=badge]]:border-border data-active:[&_[data-slot=badge]]:bg-background data-active:[&_[data-slot=badge]]:text-foreground">
               {tc(`languages.${locale}`)}
               <StatusBadge locale={locale} status={rowStatus(watched[locale])} />
             </TabsTrigger>

@@ -46,3 +46,6 @@ next-env.d.ts
 # sharing one via git.
 # .claude/CLAUDE.md
 # .claude/settings.local.json
+
+# storybook
+/storybook-static/

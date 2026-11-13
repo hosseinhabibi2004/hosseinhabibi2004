@@ -105,7 +105,7 @@ flowchart LR
   - Difficulty: M
   - Model: sonnet
 
-- [ ] **A5. Add Storybook with RTL/LTR controls**
+- [x] **A5. Add Storybook with RTL/LTR controls**
   - Files: `admin/.storybook/main.ts`, `admin/.storybook/preview.tsx` (new), `admin/package.json`, one `*.stories.tsx` next to every file in `admin/src/components/ui/` and every component from A4
   - Change: `storybook` and `build-storybook` scripts; a toolbar that switches `dir` and `lang` (strings arrive with B1); the dark class always on; the a11y addon.
   - Difficulty: L
@@ -244,3 +244,5 @@ flowchart LR
 - C1: a `StatTile` with an `href` is now one link over label, figure and hint (the frozen dashboard test reads the count inside the link); the stat grid waits for both counts before it shows.
 - C3: the editor's labels live in `common.editor.*` (no new namespace); the story file moves into A5 with the rest of the stories.
 - C4: the cover uploads on save (not on pick), so an abandoned form leaves no orphan image; alt texts apply to a newly chosen file only (an existing cover is replaced, its alt texts are not loaded). The root layout now mounts the `Toaster`. The SDK's `LocaleEnum` and `StatusEnum` are `const enum`s, so the form casts instead of importing them at runtime.
+- A5: `@storybook/nextjs-vite` (the Next framework package worked; no fallback needed). 42 stories, one per component file. `pnpm build` needed `experimental.rootParams` because next-i18next's server entry imports `next/root-params`.
+- Run-app (api :8010, admin :3001, browser pane): signed-out `/posts` redirects to `/login`; login, dashboard, Posts list, Post form, delete confirm, Trash and restore driven in Persian (RTL); dashboard and phone layout (375px) in English. Created a post through the form, deleted it, saw it in Trash, restored it. Defects found and fixed: the CSRF token was lost on a reload, so every save returned 403 (`useSession` now restores it); the active language tab hid its status badge (white on white); Next's dev badge covered the bottom bar. Known gap: a post in the Trash shows "(untitled)" because the API hides a deleted post's translation rows.

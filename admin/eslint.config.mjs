@@ -12,6 +12,7 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "storybook-static/**",
     // Never hand-edited or lint-worthy — codegen output (api-services.md, api-04).
     "**/generated/**",
   ]),
