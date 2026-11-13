@@ -1,4 +1,4 @@
-"""OpenAPI post-processing: document the response envelope.
+"""OpenAPI post-processing: document the response envelope and optional parameters.
 
 `BaseJSONRenderer` wraps every response in `{success, message, result, meta}`,
 but a view's serializer describes only `result`. Without this hook the generated
@@ -28,6 +28,9 @@ def wrap_in_envelope(result: dict[str, Any], **_kwargs: object) -> dict[str, Any
         for operation in path_item.values():
             if not isinstance(operation, dict):
                 continue
+            # Say "optional" out loud: some parameters leave `required` out.
+            for parameter in operation.get("parameters", []):
+                parameter.setdefault("required", False)
             for code, response in operation.get("responses", {}).items():
                 if not str(code).startswith("2"):
                     continue

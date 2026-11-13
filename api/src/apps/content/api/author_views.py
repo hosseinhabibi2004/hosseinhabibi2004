@@ -6,7 +6,8 @@ brings it back, and `?deleted=true` lists the hidden ones.
 
 from typing import TYPE_CHECKING, ClassVar
 
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import OpenApiParameter, extend_schema
 from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
@@ -58,6 +59,19 @@ class AuthorViewSet(viewsets.ModelViewSet):
         else:
             queryset = self.model.objects.all()
         return queryset.prefetch_related(*self.prefetch).order_by("-pk")
+
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                "deleted",
+                OpenApiTypes.BOOL,
+                required=False,
+                description="`true` lists the soft-deleted rows (the Trash).",
+            )
+        ]
+    )
+    def list(self, request: "Request", *args: object, **kwargs: object) -> Response:
+        return super().list(request, *args, **kwargs)
 
     def perform_destroy(self, instance: SoftDeleteModel) -> None:
         instance.delete(deleted_by=self.request.user)

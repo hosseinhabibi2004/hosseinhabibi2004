@@ -71,7 +71,7 @@ flowchart LR
 
 ### Phase A — Design system
 
-- [ ] **A1. Document the `deleted` filter and add the dependencies and scripts**
+- [x] **A1. Document the `deleted` filter and add the dependencies and scripts**
   - Files: `api/src/apps/content/api/author_views.py`, `admin/src/sdk/generated/` (regenerated), `admin/package.json`, `admin/pnpm-lock.yaml`, `admin/src/app/layout.tsx`
   - Change:
     - API: an `OpenApiParameter("deleted", bool)` on the Author lists (`extend_schema_view`, near `author_views.py:42`); regenerate the admin SDK with the API running.
@@ -81,14 +81,14 @@ flowchart LR
   - Difficulty: M
   - Model: sonnet
 
-- [ ] **A2. Write the dark-only tokens**
+- [x] **A2. Write the dark-only tokens**
   - Files: `admin/src/app/globals.css`
   - Change: black/white/gray tokens in `:root` (background, foreground, card, muted, border, input, ring, primary, secondary, accent, popover, scrim, `destructive`); remove the light/dark split and the unused `sidebar-*`/`chart-*` tokens; the font stack Geist, then Vazirmatn; `--spacing: 0.25rem`.
   - Difficulty: M
   - Model: sonnet
   - Contrast targets: 4.5 for text pairs, 3 for borders and rings, measured by the test in §4.
 
-- [ ] **A3. Port the UI kit**
+- [x] **A3. Port the UI kit**
   - Files: `admin/src/components/ui/` (new, from `roshan-clinic/frontend/src/components/ui/`), `admin/components.json`
   - Change:
     - Copy the 24 kit files: alert, avatar, badge, button, card, checkbox, dialog, dropdown-menu, field, input, label, popover, progress, select, separator, sheet, skeleton, sonner, switch, table, tabs, textarea, toggle, tooltip.
@@ -96,7 +96,7 @@ flowchart LR
   - Difficulty: M
   - Model: sonnet
 
-- [ ] **A4. Port the shared components and the formatting helpers**
+- [x] **A4. Port the shared components and the formatting helpers**
   - Files: `admin/src/components/` (new), `admin/src/lib/format.ts` (new)
   - Change:
     - From `roshan-clinic/frontend/src/components/`: `PageHeader`, `StatGrid`, `EmptyState`, `LoadError`, `ConfirmDialog`, `FormDialog`, `FormErrorAlert`, `IconAction`, `UrlTabs`, `Wordmark`, `data-table/`, `Form/`.
@@ -229,4 +229,12 @@ flowchart LR
 
 ## Execution log
 
-<Filled in by /banna-build: files changed, task/verify results, divergences and how they were resolved.>
+- Base commit: `fab58f3` on branch `feature/admin-design-system` (the previous branch `feature/content-models` is not merged; this work sits on top of it).
+- Models: all tasks `sonnet`, run inline by the sonnet session.
+- Tests for all phases were written once, in two red commits, so the contract was approved once.
+- Frozen tests (api): `api/src/apps/content/tests/test_schema_deleted_filter.py` @ `dd993c0`
+- Frozen tests (admin): `admin/src/app/__tests__`, `admin/src/i18n/__tests__`, `admin/src/i18n/test-utils.tsx`, `admin/src/lib/__tests__/format.test.ts`, `admin/src/features/auth/__tests__`, `admin/src/features/shell/__tests__`, `admin/src/features/posts/__tests__`, `admin/src/features/dashboard/__tests__`, `admin/src/components/__tests__`, `admin/src/components/rich-text/__tests__`, `admin/src/sdk/__tests__` @ `c4f73ef`
+- Divergence from the plan text: `isolateText` wraps in Unicode isolates (as roshan-clinic's does), not `<bdi dir="ltr">`; the editor round-trip test asserts kept constructs plus stability, not byte-identical Markdown.
+- A1: the API schema hook also writes `required: false` on optional parameters, because the frozen test asserts the key and the generator leaves it out. `pnpm add` needed `npm_config_fetch_timeout=300000` and concurrency 2 on this network (default settings dropped a tarball three times).
+- A3: the kit uses `@/i18n/client` (dialog, sonner), which B1 creates, so `pnpm typecheck` stays red until B1 (the frozen tests import modules from later tasks too). `Input` lost roshan's digit-mode conversion (admin is bilingual); the switch thumb moves by `translate-x` so the spacing guard passes; sonner is dark and bottom-centre.
+- A4: ported without roshan-clinic's API layer: `lib/api-errors.ts` reads this API's envelope (`result.error_detail`, `message`). Pagination formats digits by `i18n.language`; `Wordmark` is text only; `StatGrid` lost the `positive` tone. Components use i18n keys that B1 defines (`common`: `cancel`, `close`, `loading`, `retry`, `errors.*`, `table.*`, `languages.*`, `status.*`).
