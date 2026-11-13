@@ -1,124 +1,100 @@
 ---
 name: run-app
-description: Launch the Roshan Clinic stack locally with no Docker (Postgres + Django + Next.js, Redis optional), seed demo data, and drive the team panel in a headless browser to check a change by hand. Use whenever a change needs to be seen rather than only tested — root CLAUDE.md requires this before any change is called done — or when asked to run, start, seed, or screenshot the app.
+description: Bring a project's app up on this machine and exercise it to see a change working, not only tested — start the servers (checking ports and databases first, without disturbing anything else running), sign in, click through the screens a change touched or smoke-check the API, then clean up. Use when asked to run, start, try, screenshot or demo the app, or when a skill such as /banna-build needs the real stack driven before a change is called done. Works for any stack; it learns how the project runs from the project itself.
 ---
 
-# Running Roshan Clinic locally (no Docker)
+# Run the app
 
-Needs: `uv`, `pnpm`, Node, PostgreSQL 16 binaries (`/usr/lib/postgresql/16/bin`
-on Debian/Ubuntu), and for screenshots Playwright + a Chromium
-(`PLAYWRIGHT_CHROMIUM` / `/opt/pw-browsers`). Redis is optional — the stack runs
-with `REDIS_URL=none` and eager Celery.
+A green test suite is not "done" for a change someone will look at or call: tests
+assert values, and rendering, wiring and configuration fail where assertions are
+blindest. This skill gets the real thing running and uses it. It assumes nothing
+about the stack: it reads how **this** project runs, and leaves everything it did
+not start alone.
 
-## 1. Bring it up
+## 1. Learn how this project runs
 
-```bash
-.claude/skills/run-app/scripts/up.sh      # Postgres :5433, Django :8000, Next :3000
-.claude/skills/run-app/scripts/down.sh    # stop all three
-```
+Look, in this order, and use the first that answers:
 
-`up.sh` is idempotent: it creates a throwaway Postgres cluster under
-`/tmp/roshan-run/` (owned by the `postgres` user when run as root), writes
-`backend/.env` if missing (gitignored), runs `migrate` and `seed_demo`, starts
-`runserver --nothreading` (threaded dev servers leak Postgres connections; the autoreloader stays on, so backend edits restart it) and `pnpm dev`, waits until both answer, and prints the credentials.
-Logs: `/tmp/roshan-run/{postgres,django,next}.log`.
+1. `.claude/launch.json` — named server configurations, with ports.
+2. The project's instruction files: `CLAUDE.md` / `AGENTS.md`, the area's `docs/README.md`,
+   the root `README.md` — a "run it" section.
+3. The manifests: `package.json` scripts, `Makefile`, `docker-compose*.yaml`,
+   `manage.py`, `pyproject.toml`, `Cargo.toml`, `go.mod`.
 
-Next proxies `/api/*` to Django (`API_UPSTREAM` in `frontend/.env`), so the
-browser stays on `http://localhost:3000` and the refresh cookies are
-first-party. After a new backend app, restart Django (`down.sh && up.sh`).
+Write down: which processes make up the app (API, web, admin, worker, database), the
+command and port of each, which environment files they read, whether a database
+needs creating, migrating or seeding, and how a person signs in. If a project
+declares several areas (for example `api`, `web`, `admin`), run every one a change
+touches or depends on.
 
-## 2. Accounts (password `Demo12345`)
+If nothing documents it, say so, work it out from the manifests, and offer to add a
+`.claude/launch.json` entry once it works.
 
-| Who | Mobile | Roles · where |
-|---|---|---|
-| Platform admin (no clinic seat) | `09120000001` | `/login`, lands on `/admin/clinics` |
-| «مریم احمدی» | `09120000002` | **owner + practitioner** in «کلینیک روشن» (role picker at sign-in), owner in «کلینیک آرام» |
-| «نرگس کریمی» | `09120000003` | secretary of «کلینیک روشن» |
-| «علی کریمی» | `09120000005` | practitioner only in «کلینیک روشن» (straight to their read-only calendar) |
-| «سارا موسوی» | `09120000006` | **secretary + practitioner** in «کلینیک روشن» (role picker) |
-| «سارا رحیمی» | `09120000004` | secretary of «کلینیک آرام» |
-| «نگار صادقی» | `09120000007` | practitioner only in «کلینیک آرام» |
-| «پویا رضایی» | `09120000008` | practitioner only in «کلینیک آرام» |
-
-Seeded by `seed_demo` (`clinics` app): two clinics, their members with the roles above, and
-the admin without a seat. A practitioner is a role of a member (ADR 0129): there is no separate
-practitioner record. `grant_membership --phone … --clinic <uuid> --role owner --role practitioner`
-(repeat `--role`) gives anyone, the admin included, a seat. A person with several roles in the
-clinic picks one at sign-in and switches from the header (`X-Role`); the practitioner role is a
-strictly read-only calendar of their own column.
-
-A freshly **created** account or a **reset** one gets a one-time temporary
-password and lands on the forced change-password screen. Five wrong passwords
-lock a phone for 15 minutes (`AUTH_005`); restart Django to clear the in-memory
-counter.
-
-The `users` initial migration was regenerated in Plan 1: a database made before
-it must be recreated — `down.sh`, delete `/tmp/roshan-run`, `up.sh`.
-
-Plan 2 demo data: the practitioners of «کلینیک روشن» are «مریم احمدی», «علی کریمی» and «سارا موسوی»
-with weekly hours, and there is one closure ten days out; «کلینیک آرام» has «نگار صادقی»
-and «پویا رضایی». The migration holds the 26 holidays of 1405. After changing the seed or the
-role model use a fresh database (`down.sh`, delete `/tmp/roshan-run`, `up.sh`).
-
-Plan 3 demo data: «کلینیک روشن» has 40 invented patients, «کلینیک آرام» has 10
-(`patients/demo.py`, through the service). «علي رضايي» was typed with Arabic letters and is
-stored as «علی رضایی» (phone `09121110001`, national code `0499370899`); «مینا حسینی» and
-«آرمان حسینی» share the phone `09121110010`; «لیلا صفایی» is archived; «رضایی» is a family of
-four, so searching «رضای» finds several. «کلینیک آرام» holds a patient with the same phone
-`09121110001` and one with the same national code `0499370899` (per-clinic uniqueness: nothing
-leaks or collides). Routes: `/patients` (`?q=&status=all`) and `/patients/<id>` (`?merge=<uuid>`).
-Things to try: «رضای», a phone typed in Persian digits, `04993`, «نیکپور» (finds «نیک‌پور»), a
-search with no match and its «بیمار جدید: «…»» row, a new patient with `09121110010` (the
-warning and the toast's «ادغام با…»), the merge comparison, archive and «نمایش بایگانی‌شده‌ها».
-The admin has no «بیماران» link; `GET /api/team/clinic/patients/` with the admin's token is
-`403 CLINIC_001`.
-
-Plan 4 demo data: `seed_demo` also books appointments from the Saturday of the current week for three weeks in «کلینیک روشن» (three practitioners, different densities, marks by date: past days «آمد», the next two days «تأیید شد») and a handful in «کلینیک آرام». It includes one deleted row, one moved row, a booking on the Friday holiday and one in a hatched zone; the demo closure and the Friday holiday fall in the window. Seeding is anchored to a date (`seed_demo --today YYYY-MM-DD`): the same day twice changes nothing, a later day adds only the new weeks; **use a fresh database** (`down.sh`, delete `/tmp/roshan-run`, `up.sh`) after changing the seed. The calendar is the home `/` (`?view=week|day&p=<practitioner>&d=<YYYY-MM-DD>&patient=<patient>`); `/patients/<id>` lists the patient's appointments. Restart Django after pulling a new app. `scripts/card-matrix.cjs --states|--move|--dark|--grey --out <dir>` route-mocks a synthetic day and shoots every card state and length, printing the card contrast. Running the flows moves the owner's last-used clinic: re-enter «کلینیک روشن» before the e2e.
-
-Plan 5 demo data and screens: the next working day after the seed's `today` is the day of tomorrow's calls (12+ rows over at least two practitioners, about 55 % confirmed). `/calls` lists it (`?date=<YYYY-MM-DD>` picks a day, `?p=<practitioner>` filters; no `date` = automatic); a closure ten days out in «کلینیک روشن» gives the closed-day state (find a closed date with `GET /api/team/clinic/calendar/days/?from=&to=`), a date far away the empty state, the Friday is skipped by prev/next. Read it with `curl -H "Authorization: Bearer …" -H "X-Clinic: <uuid>" /api/team/clinic/calls/` and `…/free-slots/?practitioner=<uuid>&from=<date>&anchor=<appointment uuid>`; the admin without a seat gets `403 CLINIC_001` on both. The free-slot panel opens from the calendar: the toolbar «وقت خالی» (`/?panel=free`), a card's «نوبت بعدی» (`/?panel=free&anchor=<appointment>&fp=<practitioner>&ff=<date>`), or a patient's «نوبت جدید برای این بیمار» (`/?patient=<uuid>&panel=free`); `fp`, `ff` and `anchor` are the panel's own params and compose with `view`, `p`, `d`. `/?view=week&p=<practitioner>&d=<date>&move=<appointment>` opens the week in move mode (the «جابه‌جایی» link of `/calls`). The panel is a side sheet below 1440 px and a docked column from 1440 px. Booking from a slot or a card goes through Plan 4's create and leaves a «واگرد» toast: press it (or Delete on the card) so the demo data stays as found.
-
-**Whole e2e run.** `pnpm e2e` signs in about a hundred times in a few minutes, more than the default `LOGIN_THROTTLE_RATE` (30 per minute per IP) allows, so the last tests fail at the login screen. Bring the stack up with `LOGIN_THROTTLE_RATE=1000/minute .claude/skills/run-app/scripts/up.sh` before a whole run.
-
-**Holiday fetch stub.** persian-calendar.ir is unreachable from some machines. To exercise
-the fetch, serve the bundled file and point Django at it:
+## 2. Check ports and data before starting anything
 
 ```bash
-python3 - <<'PY' &   # a loopback stub on :8765
-import http.server, pathlib
-f = pathlib.Path("backend/src/apps/clinics/data/holidays-1405.json").read_bytes()
-class H(http.server.BaseHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200); self.send_header("Content-Type","application/json"); self.end_headers(); self.wfile.write(f)
-http.server.HTTPServer(("127.0.0.1", 8765), H).serve_forever()
-PY
-HOLIDAY_API_BASE_URL=http://127.0.0.1:8765 .claude/skills/run-app/scripts/up.sh   # restart Django with it
+${CLAUDE_SKILL_DIR}/scripts/port-owner.sh 8000 3000   # free, or who holds it
 ```
 
-Plain HTTP to loopback is accepted only with `DEBUG=True`. With the default host the fetch
-dialog shows its graceful failure state.
+- **A port is taken by something you did not start:** it is someone's other project.
+  Never kill it and never bind over it (a server on `127.0.0.1:P` shadows one on
+  `*:P` for local traffic). Pick another free port and pass it through the project's
+  own mechanism: a flag, or a **gitignored** override file (`.env.local`). Keep
+  everything that names the port consistent: base URLs, CORS and CSRF origins, proxy
+  targets, OAuth callbacks. Say which ports you used.
+- **Data:** do not point a seeding or destructive run at the person's real database.
+  Use a throwaway one (a temporary SQLite file, or a scratch database you create and
+  drop) unless they asked to use their own data. Migrations on their local dev database
+  are fine when the app cannot start without them; say so.
+- **Environment files:** create a missing one from `.env.example` into the gitignored
+  file; never overwrite or print an existing one.
 
-## 3. Drive it
+## 3. Start it
+
+Prefer the preview tools with a `.claude/launch.json` entry (create one if missing: a
+name, the command, the port). Otherwise start each process in the background with its
+output going to a log file in the session scratch directory, never a bare `&` in the
+foreground shell. Then wait until it answers:
 
 ```bash
-node .claude/skills/run-app/scripts/drive.cjs shot /admin/clinics --as 09120000001 --out /tmp/clinics.png
-node .claude/skills/run-app/scripts/drive.cjs shot /staff --as 09120000002 --clinic آرام --mobile
-node .claude/skills/run-app/scripts/drive.cjs shot / --as 09120000001 --mobile --dark
+${CLAUDE_SKILL_DIR}/scripts/wait-for.sh http://localhost:8010/health 60
 ```
 
-Flags: `--as <phone>`, `--password`, `--clinic <name>` (after sign-in, open
-«تغییر کلینیک», choose that clinic and wait for the reload), `--mobile` (390×844),
-`--dark`, `--full`, `--out`. For multi-step flows write a short Playwright script that
-`require`s `playwright` from `$(npm root -g)` and use the labels the screens
-show (everything is Persian — `getByRole("button", { name: "کلینیک جدید" })`).
+Check the logs for tracebacks even when the port answers. A dev server that "started"
+and a request that works are different things.
 
-Read the PNG. In this UI the defects tests miss are: Latin digits beside Persian
-ones, collapsed title/hint lines, English words inside Persian sentences,
-text running the wrong way around a Latin name, and layouts that break at
-390px or in dark mode.
+Needs a runtime or tool you do not have (a database server, a browser binary)? Say
+exactly which, and stop; do not install system software unasked.
 
-## 4. Checks that go with it
+## 4. Use it
 
-```bash
-cd frontend && pnpm lint && pnpm typecheck && pnpm test && pnpm build
-cd backend && uv run pytest && uv run ruff check .
-```
+**Something a person looks at** (a page, a form, an editor): open it in a browser —
+the built-in browser for `localhost`, or Playwright when the project already uses it.
+Sign in with the project's test or seed accounts (its seed command, fixtures or
+example config; a local-dev test account you create is fine, and its password is
+recorded in a gitignored file, not repeated in chat). Click through **the screens the
+change touched**, the empty, error and success states, and the other languages,
+themes and widths the project supports. Take screenshots and read them. Read the
+browser console and failed network requests.
+
+**No screen** (an API, a library, a job): drive it with real requests against the live
+process: the sign-in handshake the project uses, a happy path through each touched
+endpoint, and the refusals (unauthenticated, forbidden, invalid input, not found). A
+smoke script in the scratch directory is fine; it is not a test to commit unless asked.
+
+What to look for, because tests miss it: a layout that breaks at one width, numbers or
+dates formatted wrongly for a locale, text in the wrong language or direction, a
+missing loading or empty state, a request the browser blocks (CORS, cookies, mixed
+content), a stale generated client, a migration or seed that was never run.
+
+## 5. Fix, report, clean up
+
+- Fix what the run finds before reporting, each fix as its own change; a finding that
+  changes the design is a divergence to raise, not to improvise.
+- Report what you ran (processes, ports, accounts by name), what you covered (screens,
+  requests, locales) and what you could not run. A skipped check is said plainly, never
+  omitted.
+- Leave servers running only if the person asked to try the app themselves; then give
+  the URLs and how to stop them. Otherwise stop every process you started, drop scratch
+  databases, and delete temporary files and uploaded media you created. Never stop or
+  remove anything that was already there.

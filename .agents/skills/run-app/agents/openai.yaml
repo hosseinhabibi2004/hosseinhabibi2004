@@ -1,7 +1,7 @@
 interface:
   display_name: "Run App"
-  short_description: "Launch and visually verify the local Roshan Clinic"
-  default_prompt: "Use $run-app to launch Roshan Clinic and verify the affected workflow."
+  short_description: "Run the project's app locally and exercise it to verify a change"
+  default_prompt: "Use $run-app to run this project locally and verify the affected workflow."
 
 policy:
   allow_implicit_invocation: true
