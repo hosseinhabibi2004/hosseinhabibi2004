@@ -1,0 +1,39 @@
+{
+  "cancel": "انصراف",
+  "close": "بستن",
+  "yes": "بله",
+  "loading": "در حال بارگذاری…",
+  "retry": "تلاش دوباره",
+  "search": "جستجو",
+  "notifications": "اعلان‌ها",
+  "save": "ذخیره",
+  "delete": "حذف",
+  "restore": "بازیابی",
+  "edit": "ویرایش",
+  "languages": {
+    "en": "انگلیسی",
+    "fa": "فارسی"
+  },
+  "status": {
+    "empty": "خالی",
+    "draft": "پیش‌نویس",
+    "published": "منتشر شده"
+  },
+  "errors": {
+    "generic": "مشکلی پیش آمد. دوباره تلاش کنید.",
+    "invalidCredentials": "نام کاربری یا گذرواژه نادرست است.",
+    "notAllowed": "اجازهٔ انجام این کار را ندارید.",
+    "loadFailed": "بارگذاری انجام نشد. دوباره تلاش کنید."
+  },
+  "table": {
+    "empty": "موردی پیدا نشد.",
+    "loadFailed": "بارگذاری فهرست انجام نشد.",
+    "nextPage": "صفحه بعد",
+    "previousPage": "صفحه قبل",
+    "pageOf": "صفحه {{page}} از {{total}}",
+    "resultCount": "{{formattedCount}} مورد",
+    "rowActions": "عملیات",
+    "searchPlaceholder": "جستجو…",
+    "resetFilters": "پاک کردن فیلترها"
+  }
+}

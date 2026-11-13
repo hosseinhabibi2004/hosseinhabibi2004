@@ -1,0 +1,39 @@
+{
+  "cancel": "Cancel",
+  "close": "Close",
+  "yes": "Yes",
+  "loading": "Loading…",
+  "retry": "Try again",
+  "search": "Search",
+  "notifications": "Notifications",
+  "save": "Save",
+  "delete": "Delete",
+  "restore": "Restore",
+  "edit": "Edit",
+  "languages": {
+    "en": "English",
+    "fa": "Persian"
+  },
+  "status": {
+    "empty": "Empty",
+    "draft": "Draft",
+    "published": "Published"
+  },
+  "errors": {
+    "generic": "Something went wrong. Try again.",
+    "invalidCredentials": "Invalid username or password.",
+    "notAllowed": "You are not allowed to do this.",
+    "loadFailed": "Could not load this. Try again."
+  },
+  "table": {
+    "empty": "Nothing found.",
+    "loadFailed": "Could not load the list.",
+    "nextPage": "Next page",
+    "previousPage": "Previous page",
+    "pageOf": "Page {{page}} of {{total}}",
+    "resultCount": "{{formattedCount}} items",
+    "rowActions": "Actions",
+    "searchPlaceholder": "Search…",
+    "resetFilters": "Reset filters"
+  }
+}

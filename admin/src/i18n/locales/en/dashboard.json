@@ -1,0 +1,10 @@
+{
+  "title": "Dashboard",
+  "stats": {
+    "posts": "Posts",
+    "projects": "Projects"
+  },
+  "latest": "Latest posts",
+  "empty": "No posts yet.",
+  "untitled": "(untitled)"
+}

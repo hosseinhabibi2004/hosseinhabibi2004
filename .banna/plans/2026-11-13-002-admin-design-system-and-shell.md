@@ -114,7 +114,7 @@ flowchart LR
 
 ### Phase B — Language, sign-in and shell
 
-- [ ] **B1. Add the interface language**
+- [x] **B1. Add the interface language**
   - Files: `admin/src/i18n/` (new: `config.ts`, `client.ts`, `i18next.d.ts`, `locales/en/`, `locales/fa/`), `admin/src/app/layout.tsx`, `admin/src/components/LanguageSwitcher.tsx` and its story (new), `admin/.storybook/preview.tsx`
   - Change:
     - `next-i18next` in cookie mode (`localeInPath: false`, cookie `app-lang`, default `en`); the root layout reads the language and sets `<html lang dir>`.
@@ -124,7 +124,7 @@ flowchart LR
   - Difficulty: M
   - Model: sonnet
 
-- [ ] **B2. Add sign-in, sign-out and the gate**
+- [x] **B2. Add sign-in, sign-out and the gate**
   - Files: `admin/src/features/auth/` (new: `use-session.ts`, `AuthGate.tsx`, `LoginScreen.tsx`, `sign-out.ts`), `admin/src/app/login/page.tsx` (new), `admin/src/app/layout.tsx`
   - Change:
     - `useSession` asks `Auth.authMe`; the gate sends a signed-out visitor to `/login`.
@@ -238,3 +238,5 @@ flowchart LR
 - A1: the API schema hook also writes `required: false` on optional parameters, because the frozen test asserts the key and the generator leaves it out. `pnpm add` needed `npm_config_fetch_timeout=300000` and concurrency 2 on this network (default settings dropped a tarball three times).
 - A3: the kit uses `@/i18n/client` (dialog, sonner), which B1 creates, so `pnpm typecheck` stays red until B1 (the frozen tests import modules from later tasks too). `Input` lost roshan's digit-mode conversion (admin is bilingual); the switch thumb moves by `translate-x` so the spacing guard passes; sonner is dark and bottom-centre.
 - A4: ported without roshan-clinic's API layer: `lib/api-errors.ts` reads this API's envelope (`result.error_detail`, `message`). Pagination formats digits by `i18n.language`; `Wordmark` is text only; `StatGrid` lost the `positive` tone. Components use i18n keys that B1 defines (`common`: `cancel`, `close`, `loading`, `retry`, `errors.*`, `table.*`, `languages.*`, `status.*`).
+- Order: B1 was done before A5, because the ported components and the stories need `@/i18n/client` and the locales; no design change. `vitest.config.ts` inlines `next-i18next` (as roshan-clinic's does) so its client entry resolves `next/navigation`. `ConfirmDialog` passes `onOpenChange` a single argument, as the frozen test asserts. The Storybook toolbar part of B1 moves into A5.
+- B2: test(amend) `ca969b8` adds `useParams: () => ({})` to the `next/navigation` mocks of the auth, shell, posts (2) and dashboard tests (the I18nProvider reads route params; the user delegated the call). Re-frozen: `admin/src/features/{auth,shell,posts,dashboard}/__tests__` @ `ca969b8`. `vitest.setup.ts` registers Testing Library `cleanup` (vitest has no globals). The login screen has no language switcher: the frozen Persian test requires exactly one button.

@@ -1,0 +1,11 @@
+{
+  "brand": "Admin",
+  "nav": {
+    "dashboard": "Dashboard",
+    "posts": "Posts"
+  },
+  "menu": "Menu",
+  "language": "Interface language",
+  "account": "Account",
+  "navLabel": "Main navigation"
+}

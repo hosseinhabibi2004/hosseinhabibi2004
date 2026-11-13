@@ -11,6 +11,8 @@ import { loadCsrfToken, setCsrfToken } from "@/sdk/session";
 
 const replace = vi.fn();
 vi.mock("next/navigation", () => ({
+  // next-i18next's provider reads the route params.
+  useParams: () => ({}),
   useRouter: () => ({ replace, push: vi.fn(), refresh: vi.fn() }),
   usePathname: () => "/",
   useSearchParams: () => new URLSearchParams(),

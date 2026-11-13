@@ -1,0 +1,41 @@
+{
+  "title": "Posts",
+  "caption": "List of posts",
+  "untitled": "(untitled)",
+  "columns": {
+    "title": "Title",
+    "slug": "Slug",
+    "languages": "Languages"
+  },
+  "tabs": {
+    "all": "All posts",
+    "trash": "Trash"
+  },
+  "actions": {
+    "new": "New post",
+    "delete": "Delete post",
+    "restore": "Restore post"
+  },
+  "confirm": {
+    "deleteTitle": "Delete this post?",
+    "deleteDescription": "It moves to the Trash and can be restored.",
+    "deleteConfirm": "Delete"
+  },
+  "form": {
+    "newTitle": "New post",
+    "editTitle": "Edit post",
+    "slug": "Slug",
+    "slugHint": "Lowercase letters, digits and hyphens. It cannot change once a language is published.",
+    "title": "Title",
+    "summary": "Summary",
+    "body": "Body",
+    "published": "Published",
+    "coverImage": "Cover image",
+    "altText": "Alt text ({{language}})",
+    "save": "Save",
+    "saving": "Saving…",
+    "publishError": "A published language needs a title and a body.",
+    "saved": "Saved.",
+    "tabs": "Languages"
+  }
+}

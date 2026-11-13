@@ -8,6 +8,10 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: ["./vitest.setup.ts"],
+    // next-i18next's client entry imports `next/navigation` without a file extension,
+    // which Node's ESM resolver rejects when the package is left external; inlining
+    // lets Vite resolve it.
+    server: { deps: { inline: ["next-i18next"] } },
   },
   resolve: {
     alias: {

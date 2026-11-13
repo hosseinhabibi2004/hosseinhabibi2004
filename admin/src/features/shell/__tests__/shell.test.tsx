@@ -8,6 +8,8 @@ import { renderWithProviders } from "@/i18n/test-utils";
 
 let pathname = "/";
 vi.mock("next/navigation", () => ({
+  // next-i18next's provider reads the route params.
+  useParams: () => ({}),
   usePathname: () => pathname,
   useRouter: () => ({ replace: vi.fn(), push: vi.fn(), refresh: vi.fn() }),
   useSearchParams: () => new URLSearchParams(),

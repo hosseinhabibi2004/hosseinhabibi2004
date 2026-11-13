@@ -7,6 +7,8 @@ import { errorResponse, listResponse, okResponse, renderWithProviders } from "@/
 import { Author } from "@/sdk/generated";
 
 vi.mock("next/navigation", () => ({
+  // next-i18next's provider reads the route params.
+  useParams: () => ({}),
   useRouter: () => ({ replace: vi.fn(), push: vi.fn(), refresh: vi.fn() }),
   usePathname: () => "/posts",
   useSearchParams: () => new URLSearchParams(),

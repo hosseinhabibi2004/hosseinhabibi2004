@@ -8,6 +8,8 @@ import { Author } from "@/sdk/generated";
 
 const push = vi.fn();
 vi.mock("next/navigation", () => ({
+  // next-i18next's provider reads the route params.
+  useParams: () => ({}),
   useRouter: () => ({ replace: vi.fn(), push, refresh: vi.fn() }),
   usePathname: () => "/posts/new",
   useSearchParams: () => new URLSearchParams(),

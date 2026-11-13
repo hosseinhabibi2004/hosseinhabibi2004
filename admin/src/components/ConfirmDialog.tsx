@@ -46,7 +46,7 @@ export function ConfirmDialog({
   const { t } = useT();
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={(next) => onOpenChange(next)}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
