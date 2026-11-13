@@ -153,7 +153,7 @@ flowchart LR
 
 ### Phase E — Route guard
 
-- [ ] **E1. Add the route-security test**
+- [x] **E1. Add the route-security test**
   - Files: `backend/src/apps/core/tests/test_route_security.py` (new)
   - Change: walks the URL conf with no session. Explicit allowlist of routes that answer without one: `/api/public/*`, `/api/health/`, `/api/auth/csrf/`, `/api/auth/login/`, `/api/schema/`, `/api/docs/`. Every other route — all of `/api/author/`, plus `/api/auth/logout/` and `/api/auth/me/` — must answer 403. A new route fails the test until someone puts it on a list.
   - Difficulty: M
@@ -209,3 +209,4 @@ flowchart LR
 - Frozen tests: `backend/src/apps/content/tests`, `backend/src/apps/core/tests`, `backend/src/apps/conftest.py`, `backend/src/config/tests/test_schemas.py` @ `f03a900`
 - B3: the constraints are declared on the models in B1/B2; B3 added the initial migration. Checked once on PostgreSQL 15 (scratch database, dropped after): duplicate live slug, bad slug format and a second live profile are rejected, and a deleted post's slug is reusable.
 - D2: `@hey-api/openapi-ts` 0.99 can only filter by exact operation strings, so the fallback in the plan was used: two extra schema views (`/api/schema/public/`, `/api/schema/author/`) built from `src/config/urls/public.py` and `author.py`. The frontend SDK has 0 Author operations; the admin SDK has the Author and Auth ones.
+- E1: the test file was written in the red commit (`f03a900`) and is green since D1; no code change was needed.
