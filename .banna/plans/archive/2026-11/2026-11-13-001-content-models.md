@@ -1,5 +1,5 @@
 ---
-status: approved # draft -> approved -> done
+status: done # draft -> approved -> done
 id: 2026-11-13-001
 date: 2026-11-13
 adr: none
@@ -210,3 +210,13 @@ flowchart LR
 - B3: the constraints are declared on the models in B1/B2; B3 added the initial migration. Checked once on PostgreSQL 15 (scratch database, dropped after): duplicate live slug, bad slug format and a second live profile are rejected, and a deleted post's slug is reusable.
 - D2: `@hey-api/openapi-ts` 0.99 can only filter by exact operation strings, so the fallback in the plan was used: two extra schema views (`/api/schema/public/`, `/api/schema/author/`) built from `src/config/urls/public.py` and `author.py`. The frontend SDK has 0 Author operations; the admin SDK has the Author and Auth ones.
 - E1: the test file was written in the red commit (`f03a900`) and is green since D1; no code change was needed.
+
+### Close-out
+
+- Frozen tests (after the squash): `backend/src/apps/content/tests`, `backend/src/apps/core/tests`, `backend/src/apps/conftest.py`, `backend/src/config/tests/test_schemas.py` @ `8315ad0`. No test amendment was needed.
+- Models: all 12 tasks ran on `sonnet`, inline in the sonnet session; no escalation to opus, no same-failure-twice.
+- Verify: `ruff check` and `ruff format --check` clean; `ty` 0 errors (17 known Django-stub warnings); `pytest` 84 passed; `makemigrations --check` clean; `manage.py check` clean. Admin and frontend: `pnpm lint`, `pnpm test` (6 and 7 passed) and `pnpm build` pass (a build failed twice on a transient Google Fonts fetch and passed on retry). Frontend SDK has 0 `/api/author/` references.
+- `/run-app`: skipped on purpose — the skill is written for roshan-clinic's stack and this plan has no screen. Replaced by the non-UI smoke it allows, against a live server on a scratch PostgreSQL database (dropped after): csrf, login, image upload, alt texts, post create and publish, public read in both locales (draft hidden), delete, restore, unknown locale 404, logout, 403 afterwards. All steps as expected.
+- Divergences, none needing a pause: tests for all phases were written in one red commit; D2 used the plan's fallback; E1 needed no code; `src/config/tests/test_apps.py` (not a frozen file) was updated for the new app and to ignore the test-only app; the content migration was regenerated once for the default-manager change before it was ever applied.
+- Docs written: `backend/docs/CONTEXT.md` (during the grill), `backend/docs/conventions/README.md` (`dj-mod-01`..`03`, `dj-api-01`, `dj-api-02`), `backend/CLAUDE.md` (index). No ADR.
+- Commits on `feature/content-models` after the squash: `8315ad0` feat(content): add the content models with the Author and Public APIs; `7eae68e` feat(api): split the OpenAPI document per surface and regenerate both SDKs; `e2e165d` docs(backend): add the conventions and the area index.
