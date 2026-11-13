@@ -67,34 +67,13 @@ export function StatTile({
   emphasis?: boolean;
   /** Let the figure take its full width (wrapping the unit under the number) instead of eliding it. On by default: a clipped amount is a wrong amount. */
   wrap?: boolean;
-  /** Makes the whole tile a link (the label is the link, stretched over the tile). */
+  /** Makes the whole tile a link (label, figure and hint are all inside the link). */
   href?: string;
 }) {
-  return (
-    <div
-      className={cn(
-        "relative flex min-w-0 flex-col gap-1 bg-card p-4 sm:p-5",
-        emphasis && "bg-primary text-primary-foreground",
-        href && "transition-colors hover:bg-accent/50",
-        href && emphasis && "hover:bg-primary/90",
-      )}
-    >
-      <dt
-        className={cn(
-          "text-xs font-medium text-muted-foreground",
-          emphasis && "text-primary-foreground/70",
-        )}
-      >
-        {href ? (
-          <Link
-            href={href}
-            className="outline-none after:absolute after:inset-0 focus-visible:after:ring-2 focus-visible:after:ring-ring focus-visible:after:ring-inset"
-          >
-            {label}
-          </Link>
-        ) : (
-          label
-        )}
+  const body = (
+    <>
+      <dt className={cn("text-xs font-medium text-muted-foreground", emphasis && "text-primary-foreground/70")}>
+        {label}
       </dt>
       <dd
         className={cn(
@@ -106,15 +85,29 @@ export function StatTile({
         {value}
       </dd>
       {hint ? (
-        <dd
-          className={cn(
-            "text-xs text-muted-foreground",
-            emphasis && "text-primary-foreground/70",
-          )}
-        >
-          {hint}
-        </dd>
+        <dd className={cn("text-xs text-muted-foreground", emphasis && "text-primary-foreground/70")}>{hint}</dd>
       ) : null}
+    </>
+  );
+  const surface = cn(
+    "flex min-w-0 flex-col gap-1 bg-card p-4 sm:p-5",
+    emphasis && "bg-primary text-primary-foreground",
+  );
+
+  return href ? (
+    <div className="flex min-w-0 flex-col">
+      <Link
+        href={href}
+        className={cn(
+          surface,
+          "flex-1 outline-none transition-colors hover:bg-accent/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
+          emphasis && "hover:bg-primary/90",
+        )}
+      >
+        {body}
+      </Link>
     </div>
+  ) : (
+    <div className={surface}>{body}</div>
   );
 }

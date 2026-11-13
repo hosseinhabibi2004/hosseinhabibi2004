@@ -134,7 +134,7 @@ flowchart LR
   - Difficulty: L
   - Model: sonnet
 
-- [ ] **B3. Build the shell and the navigation**
+- [x] **B3. Build the shell and the navigation**
   - Files: `admin/src/features/shell/` (new: `ShellLayout`, `ShellSidebar`, `ShellHeader`, `ShellBottomNav`, `ShellUserMenu`, `nav.ts`), `admin/src/app/(app)/layout.tsx` (new)
   - Change:
     - From roshan-clinic's `features/shell`: a sidebar on wide screens, a bottom bar on a phone, a header with the language switcher and the user menu.
@@ -144,19 +144,19 @@ flowchart LR
 
 ### Phase C — Dashboard and Posts
 
-- [ ] **C1. Build the dashboard home**
+- [x] **C1. Build the dashboard home**
   - Files: `admin/src/features/dashboard/` (new), `admin/src/app/(app)/page.tsx`
   - Change: `StatGrid` cards for the number of Posts and Projects (the lists' `count`), and a table of the latest posts with their language status, each linking to its edit page; loading, empty and error states.
   - Difficulty: M
   - Model: sonnet
 
-- [ ] **C2. Build the Posts list with trash**
+- [x] **C2. Build the Posts list with trash**
   - Files: `admin/src/features/posts/` (new: `PostsList.tsx`, `posts-columns.tsx`, `posts-service.ts`), `admin/src/app/(app)/posts/page.tsx`
   - Change: `DataTable` with `page` in the URL (`nuqs`); columns title (the first available language), slug, EN and FA `StatusBadge`; a Trash tab (`?deleted=true`) with a restore action; delete behind `ConfirmDialog`; empty, loading and error states.
   - Difficulty: M
   - Model: sonnet
 
-- [ ] **C3. Build the rich-text editor**
+- [x] **C3. Build the rich-text editor**
   - Files: `admin/src/components/rich-text/` (new: `RichTextEditor.tsx`, `Toolbar.tsx`, `markdown.ts`, `RichTextEditor.stories.tsx`)
   - Change:
     - Tiptap with `@tiptap/markdown`: the value in and out is a Markdown string.
@@ -166,7 +166,7 @@ flowchart LR
   - Difficulty: L
   - Model: sonnet
 
-- [ ] **C4. Build the Post form**
+- [x] **C4. Build the Post form**
   - Files: `admin/src/features/posts/` (`PostForm.tsx`, `post-schema.ts`, `CoverImageField.tsx`), `admin/src/app/(app)/posts/new/page.tsx`, `admin/src/app/(app)/posts/[uuid]/page.tsx`
   - Change:
     - Slug, then EN and FA tabs each with a `StatusBadge`: title, summary, the body (`RichTextEditor`) and a draft/published status.
@@ -240,3 +240,7 @@ flowchart LR
 - A4: ported without roshan-clinic's API layer: `lib/api-errors.ts` reads this API's envelope (`result.error_detail`, `message`). Pagination formats digits by `i18n.language`; `Wordmark` is text only; `StatGrid` lost the `positive` tone. Components use i18n keys that B1 defines (`common`: `cancel`, `close`, `loading`, `retry`, `errors.*`, `table.*`, `languages.*`, `status.*`).
 - Order: B1 was done before A5, because the ported components and the stories need `@/i18n/client` and the locales; no design change. `vitest.config.ts` inlines `next-i18next` (as roshan-clinic's does) so its client entry resolves `next/navigation`. `ConfirmDialog` passes `onOpenChange` a single argument, as the frozen test asserts. The Storybook toolbar part of B1 moves into A5.
 - B2: test(amend) `ca969b8` adds `useParams: () => ({})` to the `next/navigation` mocks of the auth, shell, posts (2) and dashboard tests (the I18nProvider reads route params; the user delegated the call). Re-frozen: `admin/src/features/{auth,shell,posts,dashboard}/__tests__` @ `ca969b8`. `vitest.setup.ts` registers Testing Library `cleanup` (vitest has no globals). The login screen has no language switcher: the frozen Persian test requires exactly one button.
+- B3: the shell has no theme toggle and no role menus (dark only, one author); `OptionSelect` was missed in A4 and is ported here because `SelectField` imports it.
+- C1: a `StatTile` with an `href` is now one link over label, figure and hint (the frozen dashboard test reads the count inside the link); the stat grid waits for both counts before it shows.
+- C3: the editor's labels live in `common.editor.*` (no new namespace); the story file moves into A5 with the rest of the stories.
+- C4: the cover uploads on save (not on pick), so an abandoned form leaves no orphan image; alt texts apply to a newly chosen file only (an existing cover is replaced, its alt texts are not loaded). The root layout now mounts the `Toaster`. The SDK's `LocaleEnum` and `StatusEnum` are `const enum`s, so the form casts instead of importing them at runtime.

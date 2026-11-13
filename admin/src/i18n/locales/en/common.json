@@ -35,5 +35,22 @@
     "rowActions": "Actions",
     "searchPlaceholder": "Search…",
     "resetFilters": "Reset filters"
+  },
+  "editor": {
+    "label": "Rich text editor",
+    "source": "Source",
+    "sourceLabel": "Markdown source",
+    "bold": "Bold",
+    "italic": "Italic",
+    "code": "Code",
+    "link": "Link",
+    "linkPrompt": "Link address",
+    "heading2": "Heading",
+    "heading3": "Subheading",
+    "bulletList": "Bulleted list",
+    "orderedList": "Numbered list",
+    "quote": "Quote",
+    "codeBlock": "Code block",
+    "rule": "Divider"
   }
 }

@@ -7,5 +7,8 @@
   "menu": "منو",
   "language": "زبان رابط",
   "account": "حساب کاربری",
-  "navLabel": "پیمایش اصلی"
+  "navLabel": "پیمایش اصلی",
+  "skipToContent": "پرش به محتوا",
+  "userMenu": "منوی حساب",
+  "signOut": "خروج"
 }

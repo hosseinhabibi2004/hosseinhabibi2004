@@ -7,5 +7,8 @@
   "menu": "Menu",
   "language": "Interface language",
   "account": "Account",
-  "navLabel": "Main navigation"
+  "navLabel": "Main navigation",
+  "skipToContent": "Skip to content",
+  "userMenu": "Account menu",
+  "signOut": "Sign out"
 }

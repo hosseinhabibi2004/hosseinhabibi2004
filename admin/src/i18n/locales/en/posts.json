@@ -13,6 +13,7 @@
   },
   "actions": {
     "new": "New post",
+    "edit": "Edit post",
     "delete": "Delete post",
     "restore": "Restore post"
   },
@@ -36,6 +37,11 @@
     "saving": "Saving…",
     "publishError": "A published language needs a title and a body.",
     "saved": "Saved.",
-    "tabs": "Languages"
+    "tabs": "Languages",
+    "slugRequired": "Enter a slug.",
+    "slugInvalid": "Use lowercase letters, digits and hyphens.",
+    "coverHint": "PNG, JPEG or WebP.",
+    "coverCurrent": "A cover image is set. Choose a file to replace it.",
+    "coverFailed": "The cover image could not be uploaded."
   }
 }

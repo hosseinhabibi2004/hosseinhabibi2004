@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { getResources, getT, initServerI18next } from "next-i18next/server";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
+import { Toaster } from "@/components/ui/sonner";
 import { I18nProvider } from "@/i18n/client";
 import { i18nConfig } from "@/i18n/config";
 import { getDir } from "@/i18n/language";
@@ -33,6 +34,7 @@ export default async function RootLayout({
         <QueryProvider>
           <I18nProvider language={lng} resources={resources}>
             <NuqsAdapter>{children}</NuqsAdapter>
+            <Toaster />
           </I18nProvider>
         </QueryProvider>
       </body>

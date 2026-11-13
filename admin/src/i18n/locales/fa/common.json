@@ -35,5 +35,22 @@
     "rowActions": "عملیات",
     "searchPlaceholder": "جستجو…",
     "resetFilters": "پاک کردن فیلترها"
+  },
+  "editor": {
+    "label": "ویرایشگر متن",
+    "source": "متن خام",
+    "sourceLabel": "متن Markdown",
+    "bold": "پررنگ",
+    "italic": "مورب",
+    "code": "کد",
+    "link": "پیوند",
+    "linkPrompt": "نشانی پیوند",
+    "heading2": "عنوان",
+    "heading3": "زیرعنوان",
+    "bulletList": "فهرست نقطه‌ای",
+    "orderedList": "فهرست شماره‌دار",
+    "quote": "نقل‌قول",
+    "codeBlock": "بلوک کد",
+    "rule": "جداکننده"
   }
 }
