@@ -57,5 +57,19 @@ class SchemaView(DocsGateMixin, SpectacularAPIView):
     custom_settings = MappingProxyType({"TITLE": "Backend API"})
 
 
+class PublicSchemaView(DocsGateMixin, SpectacularAPIView):
+    """The Public API's document: the public site's SDK is generated from it."""
+
+    urlconf = "src.config.urls.public"
+    custom_settings = MappingProxyType({"TITLE": "Public API"})
+
+
+class AuthorSchemaView(DocsGateMixin, SpectacularAPIView):
+    """The Author API's document (sign-in included): the admin app's SDK."""
+
+    urlconf = "src.config.urls.author"
+    custom_settings = MappingProxyType({"TITLE": "Author API"})
+
+
 class SwaggerView(DocsGateMixin, SpectacularSwaggerView):
     url_name = "schema"

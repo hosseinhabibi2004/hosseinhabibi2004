@@ -8,8 +8,403 @@ export type CsrfResult = {
     csrf_token: string;
 };
 
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type Education = {
+    readonly uuid: string;
+    institution: string;
+    start_date: string;
+    end_date?: string | null;
+    translations: Array<EducationTranslation>;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type EducationRequest = {
+    institution: string;
+    start_date: string;
+    end_date?: string | null;
+    translations: Array<EducationTranslationRequest>;
+};
+
+export type EducationTranslation = {
+    locale: LocaleEnum;
+    degree: string;
+    description?: string;
+};
+
+export type EducationTranslationRequest = {
+    locale: LocaleEnum;
+    degree: string;
+    description?: string;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type Experience = {
+    readonly uuid: string;
+    company: string;
+    company_url?: string | string;
+    start_date: string;
+    end_date?: string | null;
+    translations: Array<ExperienceTranslation>;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type ExperienceRequest = {
+    company: string;
+    company_url?: string | string;
+    start_date: string;
+    end_date?: string | null;
+    translations: Array<ExperienceTranslationRequest>;
+};
+
+export type ExperienceTranslation = {
+    locale: LocaleEnum;
+    role: string;
+    location?: string;
+    description?: string;
+};
+
+export type ExperienceTranslationRequest = {
+    locale: LocaleEnum;
+    role: string;
+    location?: string;
+    description?: string;
+};
+
+/**
+ * An uploaded picture. The file is written by `ImageUploadSerializer`; alt
+ * texts are set afterwards with a nested `translations` write.
+ */
+export type Image = {
+    readonly uuid: string;
+    readonly url: string;
+    readonly width: number;
+    readonly height: number;
+    translations?: Array<ImageTranslation>;
+};
+
+/**
+ * An uploaded picture. The file is written by `ImageUploadSerializer`; alt
+ * texts are set afterwards with a nested `translations` write.
+ */
+export type ImageRequest = {
+    translations?: Array<ImageTranslationRequest>;
+};
+
+export type ImageTranslation = {
+    locale: LocaleEnum;
+    alt?: string;
+};
+
+export type ImageTranslationRequest = {
+    locale: LocaleEnum;
+    alt?: string;
+};
+
+/**
+ * Validates an uploaded picture against the size limits and writes it.
+ */
+export type ImageUploadRequest = {
+    file: Blob | File;
+};
+
+/**
+ * * `en` - en
+ * * `fa` - fa
+ */
+export const enum LocaleEnum {
+    EN = 'en',
+    FA = 'fa'
+}
+
 export type LoginRequest = {
     username: string;
+};
+
+export type PaginatedEducationList = {
+    count: number;
+    next?: string | null;
+    previous?: string | null;
+    results: Array<Education>;
+};
+
+export type PaginatedExperienceList = {
+    count: number;
+    next?: string | null;
+    previous?: string | null;
+    results: Array<Experience>;
+};
+
+export type PaginatedImageList = {
+    count: number;
+    next?: string | null;
+    previous?: string | null;
+    results: Array<Image>;
+};
+
+export type PaginatedPostList = {
+    count: number;
+    next?: string | null;
+    previous?: string | null;
+    results: Array<Post>;
+};
+
+export type PaginatedProjectList = {
+    count: number;
+    next?: string | null;
+    previous?: string | null;
+    results: Array<Project>;
+};
+
+export type PaginatedSkillGroupList = {
+    count: number;
+    next?: string | null;
+    previous?: string | null;
+    results: Array<SkillGroup>;
+};
+
+export type PaginatedTagList = {
+    count: number;
+    next?: string | null;
+    previous?: string | null;
+    results: Array<Tag>;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type PatchedEducationRequest = {
+    institution?: string;
+    start_date?: string;
+    end_date?: string | null;
+    translations?: Array<EducationTranslationRequest>;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type PatchedExperienceRequest = {
+    company?: string;
+    company_url?: string | string;
+    start_date?: string;
+    end_date?: string | null;
+    translations?: Array<ExperienceTranslationRequest>;
+};
+
+/**
+ * An uploaded picture. The file is written by `ImageUploadSerializer`; alt
+ * texts are set afterwards with a nested `translations` write.
+ */
+export type PatchedImageRequest = {
+    translations?: Array<ImageTranslationRequest>;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type PatchedPostRequest = {
+    slug?: string;
+    cover_image?: string | null;
+    tags?: Array<string>;
+    translations?: Array<PostTranslationRequest>;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type PatchedProfileRequest = {
+    email?: string;
+    avatar?: string | null;
+    links?: Array<ProfileLinkRequest>;
+    translations?: Array<ProfileTranslationRequest>;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type PatchedProjectRequest = {
+    slug?: string;
+    repo_url?: string | string;
+    live_url?: string | string;
+    featured?: boolean;
+    position?: number;
+    cover_image?: string | null;
+    skills?: Array<string>;
+    translations?: Array<ProjectTranslationRequest>;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type PatchedSkillGroupRequest = {
+    position?: number;
+    skills?: Array<SkillRequest>;
+    translations?: Array<SkillGroupTranslationRequest>;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type PatchedTagRequest = {
+    slug?: string;
+    translations?: Array<TagTranslationRequest>;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type Post = {
+    readonly uuid: string;
+    slug: string;
+    cover_image?: string | null;
+    tags?: Array<string>;
+    translations: Array<PostTranslation>;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type PostRequest = {
+    slug: string;
+    cover_image?: string | null;
+    tags?: Array<string>;
+    translations: Array<PostTranslationRequest>;
+};
+
+export type PostTranslation = {
+    locale: LocaleEnum;
+    title: string;
+    summary?: string;
+    body?: string;
+    status?: StatusEnum;
+    readonly published_at: string;
+};
+
+export type PostTranslationRequest = {
+    locale: LocaleEnum;
+    title: string;
+    summary?: string;
+    body?: string;
+    status?: StatusEnum;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type Profile = {
+    readonly uuid: string;
+    email: string;
+    avatar?: string | null;
+    links?: Array<ProfileLink>;
+    translations: Array<ProfileTranslation>;
+};
+
+export type ProfileLink = {
+    kind: string;
+    url: string;
+    position?: number;
+};
+
+export type ProfileLinkRequest = {
+    kind: string;
+    url: string;
+    position?: number;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type ProfileRequest = {
+    email: string;
+    avatar?: string | null;
+    links?: Array<ProfileLinkRequest>;
+    translations: Array<ProfileTranslationRequest>;
+};
+
+export type ProfileTranslation = {
+    locale: LocaleEnum;
+    name: string;
+    headline?: string;
+    summary?: string;
+    location?: string;
+};
+
+export type ProfileTranslationRequest = {
+    locale: LocaleEnum;
+    name: string;
+    headline?: string;
+    summary?: string;
+    location?: string;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type Project = {
+    readonly uuid: string;
+    slug: string;
+    repo_url?: string | string;
+    live_url?: string | string;
+    featured?: boolean;
+    position?: number;
+    cover_image?: string | null;
+    skills?: Array<string>;
+    translations: Array<ProjectTranslation>;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type ProjectRequest = {
+    slug: string;
+    repo_url?: string | string;
+    live_url?: string | string;
+    featured?: boolean;
+    position?: number;
+    cover_image?: string | null;
+    skills?: Array<string>;
+    translations: Array<ProjectTranslationRequest>;
+};
+
+export type ProjectTranslation = {
+    locale: LocaleEnum;
+    title: string;
+    summary?: string;
+    body?: string;
+    status?: StatusEnum;
+    readonly published_at: string;
+};
+
+export type ProjectTranslationRequest = {
+    locale: LocaleEnum;
+    title: string;
+    summary?: string;
+    body?: string;
+    status?: StatusEnum;
 };
 
 /**
@@ -18,6 +413,85 @@ export type LoginRequest = {
 export type SessionResult = {
     csrf_token: string;
     user: User;
+};
+
+export type Skill = {
+    name: string;
+    position?: number;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type SkillGroup = {
+    readonly uuid: string;
+    position?: number;
+    skills?: Array<Skill>;
+    translations: Array<SkillGroupTranslation>;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type SkillGroupRequest = {
+    position?: number;
+    skills?: Array<SkillRequest>;
+    translations: Array<SkillGroupTranslationRequest>;
+};
+
+export type SkillGroupTranslation = {
+    locale: LocaleEnum;
+    title: string;
+};
+
+export type SkillGroupTranslationRequest = {
+    locale: LocaleEnum;
+    title: string;
+};
+
+export type SkillRequest = {
+    name: string;
+    position?: number;
+};
+
+/**
+ * * `draft` - Draft
+ * * `published` - Published
+ */
+export const enum StatusEnum {
+    DRAFT = 'draft',
+    PUBLISHED = 'published'
+}
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type Tag = {
+    readonly uuid: string;
+    slug: string;
+    translations: Array<TagTranslation>;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type TagRequest = {
+    slug: string;
+    translations: Array<TagTranslationRequest>;
+};
+
+export type TagTranslation = {
+    locale: LocaleEnum;
+    name: string;
+};
+
+export type TagTranslationRequest = {
+    locale: LocaleEnum;
+    name: string;
 };
 
 export type User = {
@@ -33,9 +507,142 @@ export type User = {
     readonly email: string;
 };
 
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type EducationWritable = {
+    institution: string;
+    start_date: string;
+    end_date?: string | null;
+    translations: Array<EducationTranslation>;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type ExperienceWritable = {
+    company: string;
+    company_url?: string | string;
+    start_date: string;
+    end_date?: string | null;
+    translations: Array<ExperienceTranslation>;
+};
+
+/**
+ * An uploaded picture. The file is written by `ImageUploadSerializer`; alt
+ * texts are set afterwards with a nested `translations` write.
+ */
+export type ImageWritable = {
+    translations?: Array<ImageTranslation>;
+};
+
 export type LoginRequestWritable = {
     username: string;
     password: string;
+};
+
+export type PaginatedEducationListWritable = {
+    count: number;
+    next?: string | null;
+    previous?: string | null;
+    results: Array<EducationWritable>;
+};
+
+export type PaginatedExperienceListWritable = {
+    count: number;
+    next?: string | null;
+    previous?: string | null;
+    results: Array<ExperienceWritable>;
+};
+
+export type PaginatedImageListWritable = {
+    count: number;
+    next?: string | null;
+    previous?: string | null;
+    results: Array<ImageWritable>;
+};
+
+export type PaginatedPostListWritable = {
+    count: number;
+    next?: string | null;
+    previous?: string | null;
+    results: Array<PostWritable>;
+};
+
+export type PaginatedProjectListWritable = {
+    count: number;
+    next?: string | null;
+    previous?: string | null;
+    results: Array<ProjectWritable>;
+};
+
+export type PaginatedSkillGroupListWritable = {
+    count: number;
+    next?: string | null;
+    previous?: string | null;
+    results: Array<SkillGroupWritable>;
+};
+
+export type PaginatedTagListWritable = {
+    count: number;
+    next?: string | null;
+    previous?: string | null;
+    results: Array<TagWritable>;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type PostWritable = {
+    slug: string;
+    cover_image?: string | null;
+    tags?: Array<string>;
+    translations: Array<PostTranslationWritable>;
+};
+
+export type PostTranslationWritable = {
+    locale: LocaleEnum;
+    title: string;
+    summary?: string;
+    body?: string;
+    status?: StatusEnum;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type ProfileWritable = {
+    email: string;
+    avatar?: string | null;
+    links?: Array<ProfileLink>;
+    translations: Array<ProfileTranslation>;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type ProjectWritable = {
+    slug: string;
+    repo_url?: string | string;
+    live_url?: string | string;
+    featured?: boolean;
+    position?: number;
+    cover_image?: string | null;
+    skills?: Array<string>;
+    translations: Array<ProjectTranslationWritable>;
+};
+
+export type ProjectTranslationWritable = {
+    locale: LocaleEnum;
+    title: string;
+    summary?: string;
+    body?: string;
+    status?: StatusEnum;
 };
 
 /**
@@ -43,6 +650,25 @@ export type LoginRequestWritable = {
  */
 export type SessionResultWritable = {
     csrf_token: string;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type SkillGroupWritable = {
+    position?: number;
+    skills?: Array<Skill>;
+    translations: Array<SkillGroupTranslation>;
+};
+
+/**
+ * A model whose text lives in translation rows. Subclasses name the
+ * translation model and the FK back to the parent, and declare `translations`.
+ */
+export type TagWritable = {
+    slug: string;
+    translations: Array<TagTranslation>;
 };
 
 export type AuthCsrfData = {
@@ -143,3 +769,1298 @@ export type AuthMeResponses = {
 };
 
 export type AuthMeResponse = AuthMeResponses[keyof AuthMeResponses];
+
+export type AuthorEducationListData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * A page number within the paginated result set.
+         */
+        page?: number;
+        /**
+         * Number of results to return per page.
+         */
+        page_size?: number;
+    };
+    url: '/api/author/education/';
+};
+
+export type AuthorEducationListResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: PaginatedEducationList;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorEducationListResponse = AuthorEducationListResponses[keyof AuthorEducationListResponses];
+
+export type AuthorEducationCreateData = {
+    body: EducationRequest;
+    path?: never;
+    query?: never;
+    url: '/api/author/education/';
+};
+
+export type AuthorEducationCreateResponses = {
+    201: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Education;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorEducationCreateResponse = AuthorEducationCreateResponses[keyof AuthorEducationCreateResponses];
+
+export type AuthorEducationDestroyData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/education/{uuid}/';
+};
+
+export type AuthorEducationDestroyResponses = {
+    /**
+     * No response body
+     */
+    204: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: {
+            [key: string]: unknown;
+        };
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorEducationDestroyResponse = AuthorEducationDestroyResponses[keyof AuthorEducationDestroyResponses];
+
+export type AuthorEducationRetrieveData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/education/{uuid}/';
+};
+
+export type AuthorEducationRetrieveResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Education;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorEducationRetrieveResponse = AuthorEducationRetrieveResponses[keyof AuthorEducationRetrieveResponses];
+
+export type AuthorEducationPartialUpdateData = {
+    body?: PatchedEducationRequest;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/education/{uuid}/';
+};
+
+export type AuthorEducationPartialUpdateResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Education;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorEducationPartialUpdateResponse = AuthorEducationPartialUpdateResponses[keyof AuthorEducationPartialUpdateResponses];
+
+export type AuthorEducationUpdateData = {
+    body: EducationRequest;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/education/{uuid}/';
+};
+
+export type AuthorEducationUpdateResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Education;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorEducationUpdateResponse = AuthorEducationUpdateResponses[keyof AuthorEducationUpdateResponses];
+
+export type AuthorEducationRestoreCreateData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/education/{uuid}/restore/';
+};
+
+export type AuthorEducationRestoreCreateResponses = {
+    /**
+     * No response body
+     */
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: {
+            [key: string]: unknown;
+        };
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorEducationRestoreCreateResponse = AuthorEducationRestoreCreateResponses[keyof AuthorEducationRestoreCreateResponses];
+
+export type AuthorExperienceListData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * A page number within the paginated result set.
+         */
+        page?: number;
+        /**
+         * Number of results to return per page.
+         */
+        page_size?: number;
+    };
+    url: '/api/author/experience/';
+};
+
+export type AuthorExperienceListResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: PaginatedExperienceList;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorExperienceListResponse = AuthorExperienceListResponses[keyof AuthorExperienceListResponses];
+
+export type AuthorExperienceCreateData = {
+    body: ExperienceRequest;
+    path?: never;
+    query?: never;
+    url: '/api/author/experience/';
+};
+
+export type AuthorExperienceCreateResponses = {
+    201: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Experience;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorExperienceCreateResponse = AuthorExperienceCreateResponses[keyof AuthorExperienceCreateResponses];
+
+export type AuthorExperienceDestroyData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/experience/{uuid}/';
+};
+
+export type AuthorExperienceDestroyResponses = {
+    /**
+     * No response body
+     */
+    204: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: {
+            [key: string]: unknown;
+        };
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorExperienceDestroyResponse = AuthorExperienceDestroyResponses[keyof AuthorExperienceDestroyResponses];
+
+export type AuthorExperienceRetrieveData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/experience/{uuid}/';
+};
+
+export type AuthorExperienceRetrieveResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Experience;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorExperienceRetrieveResponse = AuthorExperienceRetrieveResponses[keyof AuthorExperienceRetrieveResponses];
+
+export type AuthorExperiencePartialUpdateData = {
+    body?: PatchedExperienceRequest;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/experience/{uuid}/';
+};
+
+export type AuthorExperiencePartialUpdateResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Experience;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorExperiencePartialUpdateResponse = AuthorExperiencePartialUpdateResponses[keyof AuthorExperiencePartialUpdateResponses];
+
+export type AuthorExperienceUpdateData = {
+    body: ExperienceRequest;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/experience/{uuid}/';
+};
+
+export type AuthorExperienceUpdateResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Experience;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorExperienceUpdateResponse = AuthorExperienceUpdateResponses[keyof AuthorExperienceUpdateResponses];
+
+export type AuthorExperienceRestoreCreateData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/experience/{uuid}/restore/';
+};
+
+export type AuthorExperienceRestoreCreateResponses = {
+    /**
+     * No response body
+     */
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: {
+            [key: string]: unknown;
+        };
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorExperienceRestoreCreateResponse = AuthorExperienceRestoreCreateResponses[keyof AuthorExperienceRestoreCreateResponses];
+
+export type AuthorImagesListData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * A page number within the paginated result set.
+         */
+        page?: number;
+        /**
+         * Number of results to return per page.
+         */
+        page_size?: number;
+    };
+    url: '/api/author/images/';
+};
+
+export type AuthorImagesListResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: PaginatedImageList;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorImagesListResponse = AuthorImagesListResponses[keyof AuthorImagesListResponses];
+
+export type AuthorImagesCreateData = {
+    body: ImageUploadRequest;
+    path?: never;
+    query?: never;
+    url: '/api/author/images/';
+};
+
+export type AuthorImagesCreateResponses = {
+    201: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Image;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorImagesCreateResponse = AuthorImagesCreateResponses[keyof AuthorImagesCreateResponses];
+
+export type AuthorImagesDestroyData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/images/{uuid}/';
+};
+
+export type AuthorImagesDestroyResponses = {
+    /**
+     * No response body
+     */
+    204: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: {
+            [key: string]: unknown;
+        };
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorImagesDestroyResponse = AuthorImagesDestroyResponses[keyof AuthorImagesDestroyResponses];
+
+export type AuthorImagesRetrieveData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/images/{uuid}/';
+};
+
+export type AuthorImagesRetrieveResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Image;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorImagesRetrieveResponse = AuthorImagesRetrieveResponses[keyof AuthorImagesRetrieveResponses];
+
+export type AuthorImagesPartialUpdateData = {
+    body?: PatchedImageRequest;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/images/{uuid}/';
+};
+
+export type AuthorImagesPartialUpdateResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Image;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorImagesPartialUpdateResponse = AuthorImagesPartialUpdateResponses[keyof AuthorImagesPartialUpdateResponses];
+
+export type AuthorImagesUpdateData = {
+    body?: ImageRequest;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/images/{uuid}/';
+};
+
+export type AuthorImagesUpdateResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Image;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorImagesUpdateResponse = AuthorImagesUpdateResponses[keyof AuthorImagesUpdateResponses];
+
+export type AuthorImagesRestoreCreateData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/images/{uuid}/restore/';
+};
+
+export type AuthorImagesRestoreCreateResponses = {
+    /**
+     * No response body
+     */
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: {
+            [key: string]: unknown;
+        };
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorImagesRestoreCreateResponse = AuthorImagesRestoreCreateResponses[keyof AuthorImagesRestoreCreateResponses];
+
+export type AuthorPostsListData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * A page number within the paginated result set.
+         */
+        page?: number;
+        /**
+         * Number of results to return per page.
+         */
+        page_size?: number;
+    };
+    url: '/api/author/posts/';
+};
+
+export type AuthorPostsListResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: PaginatedPostList;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorPostsListResponse = AuthorPostsListResponses[keyof AuthorPostsListResponses];
+
+export type AuthorPostsCreateData = {
+    body: PostRequest;
+    path?: never;
+    query?: never;
+    url: '/api/author/posts/';
+};
+
+export type AuthorPostsCreateResponses = {
+    201: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Post;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorPostsCreateResponse = AuthorPostsCreateResponses[keyof AuthorPostsCreateResponses];
+
+export type AuthorPostsDestroyData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/posts/{uuid}/';
+};
+
+export type AuthorPostsDestroyResponses = {
+    /**
+     * No response body
+     */
+    204: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: {
+            [key: string]: unknown;
+        };
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorPostsDestroyResponse = AuthorPostsDestroyResponses[keyof AuthorPostsDestroyResponses];
+
+export type AuthorPostsRetrieveData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/posts/{uuid}/';
+};
+
+export type AuthorPostsRetrieveResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Post;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorPostsRetrieveResponse = AuthorPostsRetrieveResponses[keyof AuthorPostsRetrieveResponses];
+
+export type AuthorPostsPartialUpdateData = {
+    body?: PatchedPostRequest;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/posts/{uuid}/';
+};
+
+export type AuthorPostsPartialUpdateResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Post;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorPostsPartialUpdateResponse = AuthorPostsPartialUpdateResponses[keyof AuthorPostsPartialUpdateResponses];
+
+export type AuthorPostsUpdateData = {
+    body: PostRequest;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/posts/{uuid}/';
+};
+
+export type AuthorPostsUpdateResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Post;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorPostsUpdateResponse = AuthorPostsUpdateResponses[keyof AuthorPostsUpdateResponses];
+
+export type AuthorPostsRestoreCreateData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/posts/{uuid}/restore/';
+};
+
+export type AuthorPostsRestoreCreateResponses = {
+    /**
+     * No response body
+     */
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: {
+            [key: string]: unknown;
+        };
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorPostsRestoreCreateResponse = AuthorPostsRestoreCreateResponses[keyof AuthorPostsRestoreCreateResponses];
+
+export type AuthorProfileReadData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/author/profile/';
+};
+
+export type AuthorProfileReadResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Profile;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorProfileReadResponse = AuthorProfileReadResponses[keyof AuthorProfileReadResponses];
+
+export type AuthorProfileUpdateData = {
+    body?: PatchedProfileRequest;
+    path?: never;
+    query?: never;
+    url: '/api/author/profile/';
+};
+
+export type AuthorProfileUpdateResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Profile;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorProfileUpdateResponse = AuthorProfileUpdateResponses[keyof AuthorProfileUpdateResponses];
+
+export type AuthorProfileReplaceData = {
+    body: ProfileRequest;
+    path?: never;
+    query?: never;
+    url: '/api/author/profile/';
+};
+
+export type AuthorProfileReplaceResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Profile;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorProfileReplaceResponse = AuthorProfileReplaceResponses[keyof AuthorProfileReplaceResponses];
+
+export type AuthorProjectsListData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * A page number within the paginated result set.
+         */
+        page?: number;
+        /**
+         * Number of results to return per page.
+         */
+        page_size?: number;
+    };
+    url: '/api/author/projects/';
+};
+
+export type AuthorProjectsListResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: PaginatedProjectList;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorProjectsListResponse = AuthorProjectsListResponses[keyof AuthorProjectsListResponses];
+
+export type AuthorProjectsCreateData = {
+    body: ProjectRequest;
+    path?: never;
+    query?: never;
+    url: '/api/author/projects/';
+};
+
+export type AuthorProjectsCreateResponses = {
+    201: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Project;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorProjectsCreateResponse = AuthorProjectsCreateResponses[keyof AuthorProjectsCreateResponses];
+
+export type AuthorProjectsDestroyData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/projects/{uuid}/';
+};
+
+export type AuthorProjectsDestroyResponses = {
+    /**
+     * No response body
+     */
+    204: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: {
+            [key: string]: unknown;
+        };
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorProjectsDestroyResponse = AuthorProjectsDestroyResponses[keyof AuthorProjectsDestroyResponses];
+
+export type AuthorProjectsRetrieveData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/projects/{uuid}/';
+};
+
+export type AuthorProjectsRetrieveResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Project;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorProjectsRetrieveResponse = AuthorProjectsRetrieveResponses[keyof AuthorProjectsRetrieveResponses];
+
+export type AuthorProjectsPartialUpdateData = {
+    body?: PatchedProjectRequest;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/projects/{uuid}/';
+};
+
+export type AuthorProjectsPartialUpdateResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Project;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorProjectsPartialUpdateResponse = AuthorProjectsPartialUpdateResponses[keyof AuthorProjectsPartialUpdateResponses];
+
+export type AuthorProjectsUpdateData = {
+    body: ProjectRequest;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/projects/{uuid}/';
+};
+
+export type AuthorProjectsUpdateResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Project;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorProjectsUpdateResponse = AuthorProjectsUpdateResponses[keyof AuthorProjectsUpdateResponses];
+
+export type AuthorProjectsRestoreCreateData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/projects/{uuid}/restore/';
+};
+
+export type AuthorProjectsRestoreCreateResponses = {
+    /**
+     * No response body
+     */
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: {
+            [key: string]: unknown;
+        };
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorProjectsRestoreCreateResponse = AuthorProjectsRestoreCreateResponses[keyof AuthorProjectsRestoreCreateResponses];
+
+export type AuthorSkillGroupsListData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * A page number within the paginated result set.
+         */
+        page?: number;
+        /**
+         * Number of results to return per page.
+         */
+        page_size?: number;
+    };
+    url: '/api/author/skill-groups/';
+};
+
+export type AuthorSkillGroupsListResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: PaginatedSkillGroupList;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorSkillGroupsListResponse = AuthorSkillGroupsListResponses[keyof AuthorSkillGroupsListResponses];
+
+export type AuthorSkillGroupsCreateData = {
+    body: SkillGroupRequest;
+    path?: never;
+    query?: never;
+    url: '/api/author/skill-groups/';
+};
+
+export type AuthorSkillGroupsCreateResponses = {
+    201: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: SkillGroup;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorSkillGroupsCreateResponse = AuthorSkillGroupsCreateResponses[keyof AuthorSkillGroupsCreateResponses];
+
+export type AuthorSkillGroupsDestroyData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/skill-groups/{uuid}/';
+};
+
+export type AuthorSkillGroupsDestroyResponses = {
+    /**
+     * No response body
+     */
+    204: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: {
+            [key: string]: unknown;
+        };
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorSkillGroupsDestroyResponse = AuthorSkillGroupsDestroyResponses[keyof AuthorSkillGroupsDestroyResponses];
+
+export type AuthorSkillGroupsRetrieveData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/skill-groups/{uuid}/';
+};
+
+export type AuthorSkillGroupsRetrieveResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: SkillGroup;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorSkillGroupsRetrieveResponse = AuthorSkillGroupsRetrieveResponses[keyof AuthorSkillGroupsRetrieveResponses];
+
+export type AuthorSkillGroupsPartialUpdateData = {
+    body?: PatchedSkillGroupRequest;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/skill-groups/{uuid}/';
+};
+
+export type AuthorSkillGroupsPartialUpdateResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: SkillGroup;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorSkillGroupsPartialUpdateResponse = AuthorSkillGroupsPartialUpdateResponses[keyof AuthorSkillGroupsPartialUpdateResponses];
+
+export type AuthorSkillGroupsUpdateData = {
+    body: SkillGroupRequest;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/skill-groups/{uuid}/';
+};
+
+export type AuthorSkillGroupsUpdateResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: SkillGroup;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorSkillGroupsUpdateResponse = AuthorSkillGroupsUpdateResponses[keyof AuthorSkillGroupsUpdateResponses];
+
+export type AuthorSkillGroupsRestoreCreateData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/skill-groups/{uuid}/restore/';
+};
+
+export type AuthorSkillGroupsRestoreCreateResponses = {
+    /**
+     * No response body
+     */
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: {
+            [key: string]: unknown;
+        };
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorSkillGroupsRestoreCreateResponse = AuthorSkillGroupsRestoreCreateResponses[keyof AuthorSkillGroupsRestoreCreateResponses];
+
+export type AuthorTagsListData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * A page number within the paginated result set.
+         */
+        page?: number;
+        /**
+         * Number of results to return per page.
+         */
+        page_size?: number;
+    };
+    url: '/api/author/tags/';
+};
+
+export type AuthorTagsListResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: PaginatedTagList;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorTagsListResponse = AuthorTagsListResponses[keyof AuthorTagsListResponses];
+
+export type AuthorTagsCreateData = {
+    body: TagRequest;
+    path?: never;
+    query?: never;
+    url: '/api/author/tags/';
+};
+
+export type AuthorTagsCreateResponses = {
+    201: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Tag;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorTagsCreateResponse = AuthorTagsCreateResponses[keyof AuthorTagsCreateResponses];
+
+export type AuthorTagsDestroyData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/tags/{uuid}/';
+};
+
+export type AuthorTagsDestroyResponses = {
+    /**
+     * No response body
+     */
+    204: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: {
+            [key: string]: unknown;
+        };
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorTagsDestroyResponse = AuthorTagsDestroyResponses[keyof AuthorTagsDestroyResponses];
+
+export type AuthorTagsRetrieveData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/tags/{uuid}/';
+};
+
+export type AuthorTagsRetrieveResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Tag;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorTagsRetrieveResponse = AuthorTagsRetrieveResponses[keyof AuthorTagsRetrieveResponses];
+
+export type AuthorTagsPartialUpdateData = {
+    body?: PatchedTagRequest;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/tags/{uuid}/';
+};
+
+export type AuthorTagsPartialUpdateResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Tag;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorTagsPartialUpdateResponse = AuthorTagsPartialUpdateResponses[keyof AuthorTagsPartialUpdateResponses];
+
+export type AuthorTagsUpdateData = {
+    body: TagRequest;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/tags/{uuid}/';
+};
+
+export type AuthorTagsUpdateResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: Tag;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorTagsUpdateResponse = AuthorTagsUpdateResponses[keyof AuthorTagsUpdateResponses];
+
+export type AuthorTagsRestoreCreateData = {
+    body?: never;
+    path: {
+        uuid: string;
+    };
+    query?: never;
+    url: '/api/author/tags/{uuid}/restore/';
+};
+
+export type AuthorTagsRestoreCreateResponses = {
+    /**
+     * No response body
+     */
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: {
+            [key: string]: unknown;
+        };
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type AuthorTagsRestoreCreateResponse = AuthorTagsRestoreCreateResponses[keyof AuthorTagsRestoreCreateResponses];

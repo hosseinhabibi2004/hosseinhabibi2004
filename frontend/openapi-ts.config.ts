@@ -1,11 +1,12 @@
 import { defineConfig } from "@hey-api/openapi-ts";
 
-// The SDK is generated from the Django API's OpenAPI document, which only
-// exists while the backend runs with API_DOCS_ENABLED (default under DEBUG):
+// The SDK is generated from the Public API's OpenAPI document alone, so the public
+// site never carries an Author operation. The document only exists while the
+// backend runs with API_DOCS_ENABLED (default under DEBUG):
 //   cd backend && uv run python manage.py runserver
 // then `pnpm generate:api` from here. Never hand-edit the generated folder.
 export default defineConfig({
-  input: process.env.BACKEND_SCHEMA_URL ?? "http://localhost:8000/api/schema/?format=json",
+  input: process.env.BACKEND_SCHEMA_URL ?? "http://localhost:8000/api/schema/public/?format=json",
   output: {
     path: "src/api/backend/generated",
     entryFile: true,

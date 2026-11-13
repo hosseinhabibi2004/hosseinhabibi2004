@@ -3,3 +3,354 @@
 export type ClientOptions = {
     baseUrl: 'http://localhost:8000' | (string & {});
 };
+
+export type PublicEducation = {
+    institution: string;
+    degree: string;
+    description: string;
+    start_date: string;
+    end_date: string | null;
+};
+
+export type PublicExperience = {
+    company: string;
+    company_url: string;
+    role: string;
+    location: string;
+    description: string;
+    start_date: string;
+    end_date: string | null;
+};
+
+export type PublicImage = {
+    url: string;
+    width: number;
+    height: number;
+    alt: string;
+};
+
+export type PublicLink = {
+    kind: string;
+    url: string;
+};
+
+export type PublicPostDetail = {
+    cover_image: PublicImage | null;
+    slug: string;
+    title: string;
+    summary: string;
+    published_at: string;
+    readonly tags: Array<PublicTag>;
+    body: string;
+};
+
+export type PublicPostList = {
+    cover_image: PublicImage | null;
+    slug: string;
+    title: string;
+    summary: string;
+    published_at: string;
+    readonly tags: Array<PublicTag>;
+};
+
+export type PublicProfile = {
+    name: string;
+    headline: string;
+    summary: string;
+    location: string;
+    email: string;
+    avatar: PublicImage | null;
+    readonly links: Array<PublicLink>;
+};
+
+export type PublicProjectDetail = {
+    cover_image: PublicImage | null;
+    slug: string;
+    title: string;
+    summary: string;
+    repo_url: string;
+    live_url: string;
+    featured: boolean;
+    readonly skills: Array<string>;
+    body: string;
+};
+
+export type PublicProjectList = {
+    cover_image: PublicImage | null;
+    slug: string;
+    title: string;
+    summary: string;
+    repo_url: string;
+    live_url: string;
+    featured: boolean;
+    readonly skills: Array<string>;
+};
+
+export type PublicSkill = {
+    name: string;
+};
+
+export type PublicSkillGroup = {
+    title: string;
+    readonly skills: Array<PublicSkill>;
+};
+
+export type PublicTag = {
+    slug: string;
+    name: string;
+};
+
+export type PublicPostDetailWritable = {
+    slug: string;
+    title: string;
+    summary: string;
+    published_at: string;
+    body: string;
+};
+
+export type PublicPostListWritable = {
+    slug: string;
+    title: string;
+    summary: string;
+    published_at: string;
+};
+
+export type PublicProfileWritable = {
+    name: string;
+    headline: string;
+    summary: string;
+    location: string;
+    email: string;
+};
+
+export type PublicProjectDetailWritable = {
+    slug: string;
+    title: string;
+    summary: string;
+    repo_url: string;
+    live_url: string;
+    featured: boolean;
+    body: string;
+};
+
+export type PublicProjectListWritable = {
+    slug: string;
+    title: string;
+    summary: string;
+    repo_url: string;
+    live_url: string;
+    featured: boolean;
+};
+
+export type PublicSkillGroupWritable = {
+    title: string;
+};
+
+export type EducationRetrieveData = {
+    body?: never;
+    path: {
+        locale: string;
+    };
+    query?: never;
+    url: '/api/public/{locale}/education/';
+};
+
+export type EducationRetrieveResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: PublicEducation;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type EducationRetrieveResponse = EducationRetrieveResponses[keyof EducationRetrieveResponses];
+
+export type ExperienceRetrieveData = {
+    body?: never;
+    path: {
+        locale: string;
+    };
+    query?: never;
+    url: '/api/public/{locale}/experience/';
+};
+
+export type ExperienceRetrieveResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: PublicExperience;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type ExperienceRetrieveResponse = ExperienceRetrieveResponses[keyof ExperienceRetrieveResponses];
+
+export type PostsRetrieveData = {
+    body?: never;
+    path: {
+        locale: string;
+    };
+    query?: never;
+    url: '/api/public/{locale}/posts/';
+};
+
+export type PostsRetrieveResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: PublicPostList;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type PostsRetrieveResponse = PostsRetrieveResponses[keyof PostsRetrieveResponses];
+
+export type PostsRetrieve2Data = {
+    body?: never;
+    path: {
+        locale: string;
+        slug: string;
+    };
+    query?: never;
+    url: '/api/public/{locale}/posts/{slug}/';
+};
+
+export type PostsRetrieve2Responses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: PublicPostDetail;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type PostsRetrieve2Response = PostsRetrieve2Responses[keyof PostsRetrieve2Responses];
+
+export type ProfileRetrieveData = {
+    body?: never;
+    path: {
+        locale: string;
+    };
+    query?: never;
+    url: '/api/public/{locale}/profile/';
+};
+
+export type ProfileRetrieveResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: PublicProfile;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type ProfileRetrieveResponse = ProfileRetrieveResponses[keyof ProfileRetrieveResponses];
+
+export type ProjectsRetrieveData = {
+    body?: never;
+    path: {
+        locale: string;
+    };
+    query?: never;
+    url: '/api/public/{locale}/projects/';
+};
+
+export type ProjectsRetrieveResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: PublicProjectList;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type ProjectsRetrieveResponse = ProjectsRetrieveResponses[keyof ProjectsRetrieveResponses];
+
+export type ProjectsRetrieve2Data = {
+    body?: never;
+    path: {
+        locale: string;
+        slug: string;
+    };
+    query?: never;
+    url: '/api/public/{locale}/projects/{slug}/';
+};
+
+export type ProjectsRetrieve2Responses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: PublicProjectDetail;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type ProjectsRetrieve2Response = ProjectsRetrieve2Responses[keyof ProjectsRetrieve2Responses];
+
+export type SkillsRetrieveData = {
+    body?: never;
+    path: {
+        locale: string;
+    };
+    query?: never;
+    url: '/api/public/{locale}/skills/';
+};
+
+export type SkillsRetrieveResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: PublicSkillGroup;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type SkillsRetrieveResponse = SkillsRetrieveResponses[keyof SkillsRetrieveResponses];
+
+export type TagsRetrieveData = {
+    body?: never;
+    path: {
+        locale: string;
+    };
+    query?: never;
+    url: '/api/public/{locale}/tags/';
+};
+
+export type TagsRetrieveResponses = {
+    200: {
+        success: boolean;
+        message: string;
+        details?: string;
+        result: PublicTag;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+};
+
+export type TagsRetrieveResponse = TagsRetrieveResponses[keyof TagsRetrieveResponses];
