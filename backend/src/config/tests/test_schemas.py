@@ -39,3 +39,41 @@ def test_every_success_response_documents_the_envelope() -> None:
     body = login["content"]["application/json"]["schema"]
     assert set(body["required"]) == {"success", "message", "result"}
     assert body["properties"]["result"]["$ref"].endswith("SessionResult")
+
+
+def _operations() -> list[tuple[str, str, dict]]:
+    response = APIClient().get(
+        "/api/schema/",
+        {"format": "json"},
+        HTTP_ACCEPT="application/vnd.oai.openapi+json",
+    )
+    schema = json.loads(response.content)
+    return [
+        (path, method, operation)
+        for path, item in schema["paths"].items()
+        for method, operation in item.items()
+        if method in {"get", "post", "put", "patch", "delete"}
+    ]
+
+
+def test_operations_are_tagged_by_surface_and_both_surfaces_exist() -> None:
+    operations = _operations()
+    tags = {tag for _, _, op in operations for tag in op.get("tags", [])}
+
+    assert {"Public", "Author", "Auth"} <= tags
+    for path, _method, op in operations:
+        assert set(op["tags"]) & {"Public", "Author", "Auth"}, path
+
+
+def test_public_operations_are_reads_under_api_public() -> None:
+    public = [(p, m) for p, m, op in _operations() if "Public" in op.get("tags", [])]
+
+    assert public
+    assert all(p.startswith("/api/public/") and m == "get" for p, m in public)
+
+
+def test_author_operations_live_under_api_author() -> None:
+    author = [p for p, _m, op in _operations() if "Author" in op.get("tags", [])]
+
+    assert author
+    assert all(p.startswith("/api/author/") for p in author)

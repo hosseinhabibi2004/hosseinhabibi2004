@@ -1,6 +1,13 @@
 from src.config.settings import *  # noqa: F403
 
 
+# A test-only app with a parent and a child model for the soft-delete tests.
+INSTALLED_APPS = [
+    *INSTALLED_APPS,  # noqa: F405
+    "src.apps.core.tests.softdelete_app",
+]
+
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",

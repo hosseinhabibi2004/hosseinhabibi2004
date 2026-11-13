@@ -13,6 +13,8 @@ from src.apps.core.views import HealthCheckView, SchemaView, SwaggerView
 urlpatterns = [
     path("api/health/", HealthCheckView.as_view(), name="health"),
     path("api/auth/", include("src.apps.auth.api.urls")),
+    path("api/author/", include("src.apps.content.api.author_urls")),
+    path("api/public/", include("src.apps.content.api.public_urls")),
     path("api/schema/", SchemaView.as_view(), name="schema"),
     path("api/docs/", SwaggerView.as_view(), name="docs"),
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),

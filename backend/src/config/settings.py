@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     # Apps
     "src.apps.core",
     "src.apps.auth",
+    "src.apps.content",
 ]
 
 MIDDLEWARE = [
@@ -160,6 +161,10 @@ STATICFILES_DIRS = [
 # Uploaded media (post images, covers) lives next to the database, outside git.
 MEDIA_URL = "/media/"
 MEDIA_ROOT = ROOT_DIR / "media"
+
+# Image uploads: the byte size and the longest side an uploaded picture may have.
+IMAGE_MAX_BYTES = config("IMAGE_MAX_BYTES", cast=int, default=5 * 1024 * 1024)
+IMAGE_MAX_SIDE = config("IMAGE_MAX_SIDE", cast=int, default=4000)
 
 STORAGES = {
     "default": {

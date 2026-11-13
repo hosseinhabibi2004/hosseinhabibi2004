@@ -66,20 +66,20 @@ flowchart LR
 
 ### Phase A — Shared building blocks
 
-- [ ] **A1. Add the base models to `core`**
+- [x] **A1. Add the base models to `core`**
   - Files: `backend/src/apps/core/models.py` (new), `backend/src/apps/core/tests/test_soft_delete.py` (new), `backend/src/apps/core/tests/softdelete_app/` (new), `backend/src/config/settings_test.py`
   - Change: copy `PublicIdModel`, `AuditModel`, `SoftDeleteQuerySet/Manager/Model` from roshan-clinic `backend/src/apps/core/models.py`; add the cascade `_soft_delete`/`restore` from papasi `papasi-api/papasi/apps/core/models.py`. The cascade follows reverse FKs with `on_delete=CASCADE` to other `SoftDeleteModel`s only.
   - The test needs a parent and a child model, and `core` has none: add a test-only app `backend/src/apps/core/tests/softdelete_app/` (`Parent`, `Child` with a CASCADE FK) and list it in `INSTALLED_APPS` in `backend/src/config/settings_test.py`. pytest-django creates the tables of an app with no migrations.
   - Difficulty: M
   - Model: sonnet
 
-- [ ] **A2. Add the translation base to `core`**
+- [x] **A2. Add the translation base to `core`**
   - Files: `backend/src/apps/core/translations.py` (new)
   - Change: an abstract `TranslationModel` (`locale` limited to `LANGUAGES`, soft delete) and a `PublishableTranslation` mixin (`status` draft/published, `published_at` set on first publish). Parent FK and the `(parent, locale)` unique constraint are declared per concrete model, conditional on `is_deleted=False`.
   - Difficulty: M
   - Model: sonnet
 
-- [ ] **A3. Add Pillow and the upload settings**
+- [x] **A3. Add Pillow and the upload settings**
   - Files: `backend/pyproject.toml`, `backend/uv.lock`, `backend/src/config/settings.py`, `backend/.env.example`
   - Change: add `pillow`; add the two upload limits (`IMAGE_MAX_BYTES`, `IMAGE_MAX_SIDE`) next to `MEDIA_URL`/`MEDIA_ROOT` (`settings.py:161-162`, already present).
   - Difficulty: S
@@ -87,7 +87,7 @@ flowchart LR
 
 ### Phase B — Content models
 
-- [ ] **B1. Add the `content` app with Image, Tag and Post**
+- [x] **B1. Add the `content` app with Image, Tag and Post**
   - Files: `backend/src/apps/content/` (new: `apps.py`, `models/`), `backend/src/config/settings.py` (add to `INSTALLED_APPS`, `settings.py:42`)
   - Change:
     - `Image` (file, width, height) + `ImageTranslation(alt)`.
@@ -96,7 +96,7 @@ flowchart LR
   - Difficulty: M
   - Model: sonnet
 
-- [ ] **B2. Add Profile, Skill group, Experience, Education and Project**
+- [x] **B2. Add Profile, Skill group, Experience, Education and Project**
   - Files: `backend/src/apps/content/models/` (new modules)
   - Change (fields per §2):
     - `Profile` (email, avatar Image `SET_NULL`) + `ProfileTranslation` + `ProfileLink(kind, url, position)`.
@@ -108,7 +108,7 @@ flowchart LR
   - Model: sonnet
   - Profile gets no phone field, by design.
 
-- [ ] **B3. Add the constraints and the initial migration**
+- [x] **B3. Add the constraints and the initial migration**
   - Files: `backend/src/apps/content/models/`, `backend/src/apps/content/migrations/0001_initial.py` (generated)
   - Change: conditional `UniqueConstraint`s (slug; `(parent, locale)`) on `is_deleted=False`; a singleton rule for `Profile`; check constraints for slug format and date order. Run `makemigrations content` and keep the result. Check the Profile singleton and the delete-then-reuse path once on PostgreSQL by hand (§2).
   - Difficulty: L
@@ -117,19 +117,19 @@ flowchart LR
 
 ### Phase C — Author API
 
-- [ ] **C1. Add services and serializers with nested translations**
+- [x] **C1. Add services and serializers with nested translations**
   - Files: `backend/src/apps/content/services.py` (new), `backend/src/apps/content/api/serializers.py` (new)
   - Change: serializers carry `translations: [{locale, ...}]`; a write replaces the whole set. Validation: locale in `LANGUAGES` and unique within one write; a published Post or Project Translation needs a title and body; Post and Project slugs immutable once any Translation is published, Tag slugs from creation. Services set `created_by`/`updated_by`.
   - Difficulty: L
   - Model: sonnet
 
-- [ ] **C2. Add the Author viewsets and routes**
+- [x] **C2. Add the Author viewsets and routes**
   - Files: `backend/src/apps/content/api/author_views.py` (new), `backend/src/apps/content/api/author_urls.py` (new), `backend/src/config/urls/__init__.py` (add `path("api/author/", ...)`, near `urls/__init__.py:15`)
   - Change: CRUD for every kind, `IsAuthenticated`; `DELETE` soft-deletes; `POST <id>/restore/`; `?deleted=true` lists deleted rows; addressed by `uuid`; paginated with the existing `DefaultPagination`; OpenAPI tag `Author`.
   - Difficulty: L
   - Model: sonnet
 
-- [ ] **C3. Add the image upload endpoint**
+- [x] **C3. Add the image upload endpoint**
   - Files: `backend/src/apps/content/api/author_views.py`, `backend/src/apps/content/api/serializers.py`
   - Change: multipart `POST /api/author/images/` uploads the file only; validate type by decoding with Pillow, byte size and dimensions against the limits from A3; store and record width/height. Alt texts arrive later by `PATCH` with nested `translations` (§2).
   - Difficulty: M
@@ -137,7 +137,7 @@ flowchart LR
 
 ### Phase D — Public API and SDKs
 
-- [ ] **D1. Add the Public read-only views**
+- [x] **D1. Add the Public read-only views**
   - Files: `backend/src/apps/content/api/public_views.py` (new), `backend/src/apps/content/api/public_urls.py` (new), `backend/src/apps/content/selectors.py` (new), `backend/src/config/urls/__init__.py`
   - Change: `GET /api/public/<locale>/` for posts (list; detail by slug), tags, projects (list; detail), profile, skills, experience, education. `AllowAny`, no authentication. One selector module decides what is public: non-deleted, and for Post/Project only published Translations in that locale. Unknown locale → 404. OpenAPI tag `Public`.
   - Difficulty: L
@@ -203,4 +203,8 @@ flowchart LR
 
 ## Execution log
 
-<Filled in by /banna-build: files changed, task/verify results, divergences and how they were resolved.>
+- Base commit: `b132895` on branch `feature/content-models` (baseline of the existing work committed first, on `main`).
+- Models: all tasks `sonnet`, run inline by the sonnet session.
+- Tests are written once, for all phases, in one red commit (the contract is fully specified in §4).
+- Frozen tests: `backend/src/apps/content/tests`, `backend/src/apps/core/tests`, `backend/src/apps/conftest.py`, `backend/src/config/tests/test_schemas.py` @ `f03a900`
+- B3: the constraints are declared on the models in B1/B2; B3 added the initial migration. Checked once on PostgreSQL 15 (scratch database, dropped after): duplicate live slug, bad slug format and a second live profile are rejected, and a deleted post's slug is reusable.

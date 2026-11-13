@@ -27,6 +27,8 @@ class GenericResponseMessage(ResponseMessageEnum):
     RESOURCE_NOT_FOUND = ("GENERIC_005", "Resource not found.")
     RESOURCE_CONFLICT = ("GENERIC_006", "Resource conflict.")
     SYSTEM_ERROR = ("GENERIC_007", "Internal server error.")
+    RESOURCE_DELETED = ("GENERIC_008", "Resource deleted successfully.")
+    RESOURCE_RESTORED = ("GENERIC_009", "Resource restored successfully.")
 
 
 class AuthenticationResponseMessages(ResponseMessageEnum):
