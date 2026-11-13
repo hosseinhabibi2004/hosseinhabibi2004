@@ -1,0 +1,7 @@
+interface:
+  display_name: "Banna Handoff"
+  short_description: "File out-of-scope work as a durable handoff"
+  default_prompt: "Use $banna-handoff to file this out-of-scope work as a handoff."
+
+policy:
+  allow_implicit_invocation: true

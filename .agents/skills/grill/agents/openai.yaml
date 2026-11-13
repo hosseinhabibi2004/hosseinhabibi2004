@@ -1,0 +1,7 @@
+interface:
+  display_name: "Grill"
+  short_description: "Interview the requester until the goal is fully clarified"
+  default_prompt: "Use $grill to interview me about this goal before we plan it."
+
+policy:
+  allow_implicit_invocation: true

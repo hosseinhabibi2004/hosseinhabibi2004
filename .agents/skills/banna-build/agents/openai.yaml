@@ -1,0 +1,7 @@
+interface:
+  display_name: "Banna Build"
+  short_description: "Build an approved plan test-first with frozen tests"
+  default_prompt: "Use $banna-build to build the approved plan."
+
+policy:
+  allow_implicit_invocation: true

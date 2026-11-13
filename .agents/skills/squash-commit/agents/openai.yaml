@@ -1,0 +1,7 @@
+interface:
+  display_name: "Squash Commit"
+  short_description: "Collapse a run of commits into one per feature, tree unchanged"
+  default_prompt: "Use $squash-commit to squash this branch into one commit per feature."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Banna Review"
+  short_description: "Cold-review a plan and return APPROVE or REVISE"
+  default_prompt: "Use $banna-review to review the latest plan."
+
+policy:
+  allow_implicit_invocation: true

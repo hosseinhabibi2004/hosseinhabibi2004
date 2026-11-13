@@ -1,0 +1,7 @@
+interface:
+  display_name: "Persian Writing"
+  short_description: "Natural Persian text and correct RTL deliverables"
+  default_prompt: "Use $persian-writing to write or edit this Persian text so it reads naturally."
+
+policy:
+  allow_implicit_invocation: true

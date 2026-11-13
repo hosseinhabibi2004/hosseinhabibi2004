@@ -1,0 +1,7 @@
+interface:
+  display_name: "Banna Draft"
+  short_description: "Draft a reviewed, execution-ready plan before a change"
+  default_prompt: "Use $banna-draft to draft a plan for this change."
+
+policy:
+  allow_implicit_invocation: true
