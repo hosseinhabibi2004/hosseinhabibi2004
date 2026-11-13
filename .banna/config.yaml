@@ -1,0 +1,65 @@
+# Banna config. Read by banna-draft, banna-review, banna-build, banna-handoff at the start of every run.
+# A skill that finds this file missing or invalid stops and says so; it never guesses defaults.
+
+paths:
+  plans: .banna/plans
+  handoffs: .banna/handoffs
+  archive: archive/{yyyy}-{mm}        # under each of plans/ and handoffs/
+
+# Plan file name: YYYY-MM-DD-NNN-<slug>.md. NNN counts plans within that day (001, 002, ...).
+# The plan id is the date plus NNN: 2026-11-13-001. Never reused, even after the plan is archived.
+plan_id_digits: 3
+
+areas:                                # each area keeps its own knowledge docs next to its code
+  backend:  { code: backend/,  docs: backend/docs }
+  frontend: { code: frontend/, docs: frontend/docs }
+  admin:    { code: admin/,    docs: admin/docs }     # the author's local screens, never deployed
+  root:     { code: ".",       docs: docs }          # cross-service only: API contract, deploy, constitution
+
+knowledge:                            # doc kinds; paths are relative to an area's docs dir
+  adr:         adr/            # an invariant an agent cannot infer from the code and would break
+  conventions: conventions/    # ID'd rules that apply on every change
+  context:     CONTEXT.md      # domain glossary
+  stack:       stack.md        # language, tooling, commands, environment facts
+  index:       CLAUDE.md       # at each area root: one line per doc + @AGENTS.md
+
+catalog:                              # models we actually have. tier = relative strength, cost = relative cost
+  haiku:  { id: haiku,  tier: 1, cost: 1 }
+  sonnet: { id: sonnet, tier: 2, cost: 3 }
+  opus:   { id: opus,   tier: 3, cost: 10 }
+
+difficulty:                           # banna-draft rates every task with one of these
+  S: "mechanical: rename, config, boilerplate the plan fully specifies"
+  M: "default: a specified task in a familiar codebase"
+  L: "hard: concurrency, migrations, auth, public contracts, real design freedom left to the executor"
+
+stages:                               # per stage, allowed models by difficulty, in order of preference
+  grill:       { any: [opus, sonnet],                                       effort: medium }  # runs in the main session; the session model is what counts
+  plan:        { S: [sonnet],         M: [opus, sonnet], L: [opus],         effort: medium }
+  plan_review: { any: [opus, sonnet], cold: true,                           effort: medium }
+  tests:       { S: [haiku, sonnet],  M: [sonnet],       L: [opus, sonnet], effort: medium }
+  implement:   { S: [haiku, sonnet],  M: [sonnet],       L: [opus, sonnet], effort: medium }
+  root_cause:  { any: [opus],                                               effort: high }
+  verify:      { any: [haiku, sonnet],                                      effort: low }
+  record:      { any: [sonnet, opus],                                       effort: medium }
+
+selection:
+  available: [sonnet, opus]           # only models you can use right now; the rest are skipped
+  prefer: cheapest                    # cheapest | strongest, among the allowed ones
+  escalate_on_failure: true           # same failure twice -> that task moves up one tier
+  max_tier: 3
+  enforcement: stop                   # stop | warn: when the running session model is below what a stage needs
+
+tests:
+  freeze: true                        # tests are frozen once approved; code changes, tests do not
+  commands:
+    backend:  "cd backend && uv run pytest"
+    frontend: "cd frontend && pnpm test"
+    admin:    "cd admin && pnpm test"
+  order: [contract, integration, e2e, unit]
+  forbid_in_frozen: [skip, xfail, only, snapshot-update]
+
+archive:
+  auto_on_close: true                 # banna-build moves a done plan itself
+  handoff_on_done: archive            # archive | delete
+  keep_active_days: 14
