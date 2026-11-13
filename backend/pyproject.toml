@@ -1,0 +1,139 @@
+[project]
+name = "backend"
+version = "0.0.0"
+description = "Django API: content for the static site and the author's admin screens"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=5.1.6",
+    "django-cors-headers>=4.3.1",
+    "djangorestframework>=3.15.2",
+    "drf-spectacular>=0.28.0",
+    "psycopg2-binary>=2.9.10",
+    "python-decouple>=3.8",
+    "python-dotenv>=1.0.1",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.2.0",
+    "pytest>=9.0.3",
+    "pytest-django>=4.12.0",
+    "ruff>=0.12.1",
+    "ty>=0.0.51",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "src.config.settings_test"
+pythonpath = ["."]
+testpaths = ["src/apps", "src/config"]
+
+[tool.ruff]
+exclude = ["*/migrations"]
+line-length = 88
+output-format = "concise"
+target-version = "py312"
+
+[tool.ruff.lint]
+extend-select = ["ALL"]
+ignore = [
+    # missing-trailing-comma
+    "COM812",
+    # flake8-copyright
+    "CPY",
+    # flake8-fixme
+    "FIX",
+    # pydoclint
+    "DOC",
+    # pydocstyle
+    "D",
+    # ambiguous unicode (e.g., Arabic Heh)
+    "RUF001",
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Test idioms: bare `assert`, untyped fixtures, dummy passwords, unused
+# fixture args, deferred imports, literal expected values, and reading
+# `_meta` to assert on a model's shape are normal pytest style. Tests that lean
+# on many fixtures take many arguments (PLR0913/0917), and `assert a and b`
+# reads better than two lines in an invariant check (PT018).
+"**/tests/*.py" = [
+    "PLR0913",
+    "PLR0917",
+    "PT018",
+    "SIM117",
+    "S101",
+    "S105",
+    "ANN001",
+    "ANN201",
+    "ANN202",
+    "S106",
+    "ARG001",
+    "ARG002",
+    "PLC0415",
+    "PLR2004",
+    "SLF001",
+    "ANN003",
+    "DJ008",
+    "PLW0108",
+    "ARG005",
+]
+"**/conftest.py" = ["S101", "S105", "ANN001", "ANN201", "S106", "ARG001", "ARG002"]
+# Central DRF exception handler necessarily branches over every exception
+# type the API can raise; splitting it would obscure the single dispatch
+# table this is meant to be.
+"src/apps/core/exceptions.py" = ["C901", "PLR0911", "PLR0912", "PLR0915"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.isort]
+force-wrap-aliases = true
+combine-as-imports = true
+lines-after-imports = 2
+relative-imports-order = "closest-to-furthest"
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "django",
+    "first-party",
+    "local-folder",
+]
+split-on-trailing-comma = false
+
+[tool.ruff.lint.isort.sections]
+"django" = [
+    "django",
+    "django_filters",
+    "drf_spectacular",
+    "rest_framework",
+]
+
+[tool.ty.environment]
+python = ".venv"
+python-version = "3.12"
+
+[tool.ty.src]
+exclude = ["*/migrations/*"]
+
+[tool.ty.rules]
+# ty has no Django-ORM stub plugin yet (unlike mypy's django-stubs), so model
+# managers, dynamic settings access, and field-vs-Python-type mismatches
+# produce structural false positives across any Django codebase. Downgraded
+# to warnings rather than ignored outright, so real regressions still surface.
+missing-attribute = "warn"
+missing-union-attribute = "warn"
+invalid-assignment = "warn"
+invalid-explicit-return = "warn"
+incompatible-attribute-override = "warn"
+incompatible-method-override = "warn"
+no-matching-overload = "warn"
+unsupported-operator = "warn"
+invalid-argument-type = "warn"
+not-subscriptable = "warn"
+
+[tool.ruff.format]
+indent-style = "space"
+docstring-code-format = true
+skip-magic-trailing-comma = false
+line-ending = "auto"
