@@ -1,5 +1,5 @@
 ---
-status: approved # draft -> approved -> done
+status: done # draft -> approved -> done
 id: 2026-11-13-002
 date: 2026-11-13
 adr: none
@@ -246,3 +246,5 @@ flowchart LR
 - C4: the cover uploads on save (not on pick), so an abandoned form leaves no orphan image; alt texts apply to a newly chosen file only (an existing cover is replaced, its alt texts are not loaded). The root layout now mounts the `Toaster`. The SDK's `LocaleEnum` and `StatusEnum` are `const enum`s, so the form casts instead of importing them at runtime.
 - A5: `@storybook/nextjs-vite` (the Next framework package worked; no fallback needed). 42 stories, one per component file. `pnpm build` needed `experimental.rootParams` because next-i18next's server entry imports `next/root-params`.
 - Run-app (api :8010, admin :3001, browser pane): signed-out `/posts` redirects to `/login`; login, dashboard, Posts list, Post form, delete confirm, Trash and restore driven in Persian (RTL); dashboard and phone layout (375px) in English. Created a post through the form, deleted it, saw it in Trash, restored it. Defects found and fixed: the CSRF token was lost on a reload, so every save returned 403 (`useSession` now restores it); the active language tab hid its status badge (white on white); Next's dev badge covered the bottom bar. Known gap: a post in the Trash shows "(untitled)" because the API hides a deleted post's translation rows.
+- Verified at close-out: `pnpm lint`, `pnpm typecheck`, `pnpm test` (80), `pnpm build`, `pnpm build-storybook`; api `pytest` (91) and `ruff`. Frozen checks passed against `c4f73ef`, `ca969b8` and `dd993c0`.
+- Squashed onto `fab58f3` into four commits (design system; language, sign-in and shell; dashboard and Posts; Storybook, docs and the reload fix). The frozen shas above name the pre-squash commits; the tree is identical (proof printed by `squash.sh`).
