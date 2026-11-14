@@ -1,10 +1,20 @@
 {
-  "title": "درباره",
+  "title": "دربارهٔ",
   "titleStrong": "من",
-  "metaTitle": "درباره من",
-  "experience": { "lead": "سوابق", "strong": "کاری" },
-  "education": { "lead": "سوابق", "strong": "تحصیلی", "present": "تا امروز" },
-  "skills": { "lead": "مهارت‌های", "strong": "من" },
-  "empty": "هنوز چیزی برای نمایش نیست.",
+  "metaTitle": "دربارهٔ من",
+  "experience": {
+    "lead": "سوابق",
+    "strong": "کاری"
+  },
+  "education": {
+    "lead": "سوابق",
+    "strong": "تحصیلی",
+    "present": "تا امروز"
+  },
+  "skills": {
+    "lead": "مهارت‌های",
+    "strong": "من"
+  },
+  "empty": "هنوز چیزی اینجا نیست.",
   "contact": "تماس با من"
 }

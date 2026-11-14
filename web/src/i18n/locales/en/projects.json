@@ -2,12 +2,15 @@
   "title": "Projects",
   "titleLead": "My",
   "metaTitle": "Projects",
-  "metaDescription": "Selected projects and the skills behind them.",
+  "metaDescription": "Things I've built and what I built them with.",
   "empty": "No projects yet.",
-  "emptyHint": "Check back soon.",
+  "emptyHint": "Come back later.",
   "back": "All projects",
   "repo": "Source code",
   "live": "Live site",
   "skills": "Built with",
-  "markdown": { "copy": "Copy code", "copied": "Copied" }
+  "markdown": {
+    "copy": "Copy code",
+    "copied": "Copied"
+  }
 }

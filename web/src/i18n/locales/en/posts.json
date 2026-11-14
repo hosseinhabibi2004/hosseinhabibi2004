@@ -2,11 +2,14 @@
   "title": "Posts",
   "titleStrong": "Latest",
   "metaTitle": "Posts",
-  "metaDescription": "Notes and articles on software engineering.",
+  "metaDescription": "Notes on software engineering.",
   "empty": "No posts yet.",
-  "emptyHint": "Check back soon.",
+  "emptyHint": "Come back later.",
   "back": "All posts",
   "published": "Published",
   "tags": "Tags",
-  "markdown": { "copy": "Copy code", "copied": "Copied" }
+  "markdown": {
+    "copy": "Copy code",
+    "copied": "Copied"
+  }
 }

@@ -1,14 +1,14 @@
 {
   "siteName": "حسین حبیبی",
-  "siteDescription": "مهندس نرم‌افزار. یادداشت‌ها و پروژه‌ها.",
+  "siteDescription": "مهندس نرم‌افزار. اینجا می‌نویسم و کارهایم را نشان می‌دهم.",
   "theme": {
-    "toggle": "تغییر پوسته روشن و تاریک"
+    "toggle": "تغییر تم روشن و تیره"
   },
   "nav": {
-    "main": "اصلی",
-    "mobile": "موبایل",
+    "main": "منوی اصلی",
+    "mobile": "منوی موبایل",
     "home": "خانه",
-    "about": "درباره من",
+    "about": "دربارهٔ من",
     "posts": "نوشته‌ها",
     "projects": "پروژه‌ها",
     "contact": "تماس",
@@ -18,12 +18,12 @@
     "close": "بستن منو"
   },
   "footer": {
-    "attribution": "تصویرسازی از فایل جامعهٔ فیگما «Illustration-Based Portfolio Website Template»",
+    "attribution": "تصویرها از فایل «Illustration-Based Portfolio Website Template» در Figma Community",
     "feed": "خوراک RSS"
   },
   "notFound": {
     "title": "صفحه پیدا نشد",
     "text": "این صفحه وجود ندارد یا جابه‌جا شده است.",
-    "home": "رفتن به صفحهٔ اصلی"
+    "home": "برگشت به صفحهٔ اصلی"
   }
 }

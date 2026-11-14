@@ -2,24 +2,40 @@
   "hero": {
     "greeting": "Hello, I'm",
     "basedIn": "Based in",
-    "illustrationAlt": "Illustration of a developer working on a laptop",
+    "illustrationAlt": "Drawing of a man working on a laptop",
     "links": "Profiles"
   },
-  "skills": { "lead": "My", "strong": "Skills" },
-  "experience": { "lead": "My", "strong": "Experience", "present": "Present" },
+  "skills": {
+    "lead": "My",
+    "strong": "Skills"
+  },
+  "experience": {
+    "lead": "My",
+    "strong": "Experience",
+    "present": "Present"
+  },
   "about": {
     "lead": "About",
     "strong": "Me",
-    "illustrationAlt": "Illustration of a smiling person with crossed arms",
-    "more": "Read the full resume"
+    "illustrationAlt": "Drawing of a smiling man with his arms crossed",
+    "more": "Read my full resume"
   },
-  "projects": { "lead": "My", "strong": "Projects", "all": "All projects" },
+  "projects": {
+    "lead": "My",
+    "strong": "Projects",
+    "all": "All projects"
+  },
   "contact": {
     "lead": "Let's talk about",
-    "strong": "something special",
-    "text": "Have a project, a question or just want to say hello? Send me an email or find me on one of these profiles.",
+    "strong": "your project",
+    "text": "Got a project or a question? Email me, or message me on one of these profiles.",
     "button": "Get in touch"
   },
-  "markdown": { "copy": "Copy code", "copied": "Copied" },
-  "meta": { "missingProfile": "Profile not available yet." }
+  "markdown": {
+    "copy": "Copy code",
+    "copied": "Copied"
+  },
+  "meta": {
+    "missingProfile": "No profile yet."
+  }
 }

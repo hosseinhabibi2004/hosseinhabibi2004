@@ -2,9 +2,19 @@
   "title": "About",
   "titleStrong": "Me",
   "metaTitle": "About",
-  "experience": { "lead": "My", "strong": "Experience" },
-  "education": { "lead": "My", "strong": "Education", "present": "Present" },
-  "skills": { "lead": "My", "strong": "Skills" },
-  "empty": "Nothing to show here yet.",
+  "experience": {
+    "lead": "My",
+    "strong": "Experience"
+  },
+  "education": {
+    "lead": "My",
+    "strong": "Education",
+    "present": "Present"
+  },
+  "skills": {
+    "lead": "My",
+    "strong": "Skills"
+  },
+  "empty": "Nothing here yet.",
   "contact": "Get in touch"
 }

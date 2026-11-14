@@ -19,7 +19,7 @@ interface ProjectCardProps {
 
 const LABELS: Record<Locale, { repo: string; live: string }> = {
   en: { repo: "Source code", live: "Live site" },
-  fa: { repo: "کد منبع", live: "مشاهدهٔ سایت" },
+  fa: { repo: "کد منبع", live: "دیدن سایت" },
 };
 
 const ICON_LINK =
