@@ -22,7 +22,8 @@ export interface TagWithCount {
 }
 
 const LOCALES = ["en", "fa"] as const;
-const WEB_DIR = path.resolve(import.meta.dirname, "../../..");
+// `next build` runs with web/ as cwd; `import.meta.dirname` is undefined in the bundled server code.
+const WEB_DIR = process.cwd();
 
 function contentDir(): string {
   return process.env.CONTENT_DIR

@@ -7,7 +7,13 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: "jsdom",
+    // Mirrors `trailingSlash: true` in next.config.ts, which next/link reads from this variable.
+    env: { __NEXT_TRAILING_SLASH: "1" },
     setupFiles: ["./vitest.setup.ts"],
+    // next-i18next's client entry imports `next/navigation` without a file extension,
+    // which Node's ESM resolver rejects when the package is left external; inlining
+    // lets Vite resolve it.
+    server: { deps: { inline: ["next-i18next"] } },
   },
   resolve: {
     alias: {

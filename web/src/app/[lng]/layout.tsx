@@ -1,22 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Vazirmatn } from "next/font/google";
 import { notFound } from "next/navigation";
 import { generateI18nStaticParams, getResources, getT, initServerI18next } from "next-i18next/server";
 
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/SiteHeader";
+import { ThemeScript } from "@/components/ThemeScript";
 import { I18nProvider } from "@/i18n/client";
 import { i18nConfig } from "@/i18n/config";
+import { getProfile, getTwinPaths } from "@/lib/content";
 import { getDir, isLocale, locales } from "@/lib/locale";
 import { absoluteUrl } from "@/lib/site";
+
+import "@fontsource-variable/geist-mono";
+import "@fontsource-variable/sora";
+import "@fontsource-variable/source-serif-4";
+import "@fontsource-variable/vazirmatn";
 
 import "../globals.css";
 
 initServerI18next(i18nConfig);
-
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
-// Persian script. Latin text keeps Geist; the fallback chain in globals.css
-// picks Vazirmatn for Arabic-script glyphs.
-const vazirmatn = Vazirmatn({ variable: "--font-vazirmatn", subsets: ["arabic"] });
 
 type Params = Promise<{ lng: string }>;
 
@@ -53,11 +55,19 @@ export default async function RootLayout({
     <html
       lang={lng}
       dir={getDir(lng)}
-      className={`${geistSans.variable} ${geistMono.variable} ${vazirmatn.variable} h-full antialiased`}
+      className="h-full antialiased"
+      suppressHydrationWarning
     >
+      <head>
+        <ThemeScript />
+      </head>
       <body className="min-h-full flex flex-col">
         <I18nProvider language={lng} resources={resources}>
-          {children}
+          <SiteHeader lng={lng} twinPaths={getTwinPaths(lng)} />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <SiteFooter lng={lng} profile={getProfile(lng)} />
         </I18nProvider>
       </body>
     </html>

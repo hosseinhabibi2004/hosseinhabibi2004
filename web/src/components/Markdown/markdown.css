@@ -1,0 +1,69 @@
+/* Typography for rendered Markdown (article bodies). Colours come from the theme tokens. */
+.md {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--foreground);
+}
+.md > * + * { margin-block-start: 1.25rem; }
+.md h1, .md h2, .md h3, .md h4, .md h5, .md h6 {
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-block: 2.5rem 1rem;
+}
+.md h1 { font-size: 2.25rem; }
+.md h2 { font-size: 1.75rem; }
+.md h3 { font-size: 1.375rem; }
+.md h4, .md h5, .md h6 { font-size: 1.125rem; }
+.md a { text-decoration: underline; text-underline-offset: 3px; }
+.md a:hover { text-decoration-thickness: 2px; }
+.md ul, .md ol { padding-inline-start: 1.5rem; }
+.md ul { list-style: disc; }
+.md ol { list-style: decimal; }
+.md li + li { margin-block-start: 0.4rem; }
+.md blockquote {
+  margin-block: 2.5rem;
+  text-align: center;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.3;
+}
+.md blockquote p { margin: 0; }
+.md mark {
+  background: var(--highlight);
+  color: inherit;
+  padding-inline: 0.2em;
+  border-radius: 0.25rem;
+}
+.md hr {
+  border: 0;
+  border-block-start: 1px dashed var(--border);
+  margin-block: 2.5rem;
+}
+.md img, .md video { max-width: 100%; height: auto; border-radius: 0.5rem; }
+.md :not(pre) > code {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.9em;
+  background: var(--muted);
+  padding: 0.1em 0.35em;
+  border-radius: 0.25rem;
+}
+.md .md-table { overflow-x: auto; }
+.md table { width: 100%; border-collapse: collapse; font-size: 0.95em; }
+.md th, .md td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+  text-align: start;
+}
+.md th { background: var(--muted); font-family: var(--font-sans, system-ui, sans-serif); }
+.md pre code { background: none; padding: 0; }
+
+/* highlight.js token colours on the dark code block (the same in both themes). */
+.md .hljs-comment, .md .hljs-quote { color: #8b949e; font-style: italic; }
+.md .hljs-keyword, .md .hljs-selector-tag, .md .hljs-literal, .md .hljs-built_in { color: #4ea1e6; }
+.md .hljs-string, .md .hljs-regexp, .md .hljs-addition { color: #2fb58a; }
+.md .hljs-number, .md .hljs-attr, .md .hljs-attribute { color: #e0a45a; }
+.md .hljs-title, .md .hljs-section, .md .hljs-name { color: #d7a8f2; }
+.md .hljs-type { color: #7fd1e0; }
+.md .hljs-deletion { color: #f2777a; }

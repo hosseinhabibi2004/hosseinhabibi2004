@@ -1,4 +1,23 @@
 {
   "siteName": "Hossein Habibi",
-  "siteDescription": "Software engineer. Notes and projects."
+  "siteDescription": "Software engineer. Notes and projects.",
+  "theme": {
+    "toggle": "Toggle light and dark theme"
+  },
+  "nav": {
+    "main": "Main",
+    "mobile": "Mobile",
+    "home": "Home",
+    "about": "About",
+    "posts": "Posts",
+    "projects": "Projects",
+    "contact": "Contact",
+    "resume": "Resume",
+    "skip": "Skip to content",
+    "open": "Open menu",
+    "close": "Close menu"
+  },
+  "footer": {
+    "attribution": "Illustration from the 'Illustration-Based Portfolio Website Template' Figma Community file"
+  }
 }

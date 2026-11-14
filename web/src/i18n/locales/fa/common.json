@@ -1,4 +1,23 @@
 {
   "siteName": "حسین حبیبی",
-  "siteDescription": "مهندس نرم‌افزار. یادداشت‌ها و پروژه‌ها."
+  "siteDescription": "مهندس نرم‌افزار. یادداشت‌ها و پروژه‌ها.",
+  "theme": {
+    "toggle": "تغییر پوسته روشن و تاریک"
+  },
+  "nav": {
+    "main": "اصلی",
+    "mobile": "موبایل",
+    "home": "خانه",
+    "about": "درباره من",
+    "posts": "نوشته‌ها",
+    "projects": "پروژه‌ها",
+    "contact": "تماس",
+    "resume": "رزومه",
+    "skip": "رفتن به محتوا",
+    "open": "باز کردن منو",
+    "close": "بستن منو"
+  },
+  "footer": {
+    "attribution": "تصویرسازی از فایل جامعهٔ فیگما «Illustration-Based Portfolio Website Template»"
+  }
 }
