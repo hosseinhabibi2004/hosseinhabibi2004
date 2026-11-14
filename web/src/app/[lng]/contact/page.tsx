@@ -47,10 +47,10 @@ export default async function ContactPage({ params }: { params: Params }) {
         {profile?.email ? (
           <a
             href={`mailto:${profile.email}`}
-            className="inline-flex h-14 items-center gap-2 rounded-sm bg-foreground px-5 text-xl font-semibold text-background"
+            className="inline-flex min-h-14 max-w-full items-center gap-2 rounded-sm bg-foreground px-4 text-base font-semibold text-background sm:px-5 sm:text-xl"
           >
             <Mail aria-hidden className="size-5" />
-            <span dir="ltr">{profile.email}</span>
+            <span dir="ltr" className="min-w-0 break-all">{profile.email}</span>
           </a>
         ) : null}
         {links.length > 0 ? (
