@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
   images: { unoptimized: true },
   // next-i18next reads the `[lng]` segment through `next/root-params`, which is
   // still behind a flag on this Next.js version.
-  experimental: { rootParams: true },
+  experimental: { rootParams: true, globalNotFound: true },
 };
 
 export default nextConfig;

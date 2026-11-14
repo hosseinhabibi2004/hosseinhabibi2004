@@ -31,7 +31,6 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     path: `/${lng}/about/`,
     title: t("metaTitle"),
     description: profile?.summary || undefined,
-    image: profile?.avatar?.url,
     twinPath: getTwinPaths(lng)[`/${lng}/about/`] ?? null,
   });
 }

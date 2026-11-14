@@ -35,12 +35,13 @@ export function buildMetadata(input: MetadataInput): Metadata {
   const languages: Record<string, string> = { [lng]: url };
   if (twinPath && other) languages[other] = absoluteUrl(twinPath);
 
-  const imageUrl = image ? absoluteImage(image) : absoluteUrl(`/${lng}/opengraph-image`);
+  const imageUrl = image ? absoluteImage(image) : absoluteUrl(`/${lng}/opengraph-image.png`);
 
   return {
     title,
     description,
-    alternates: { canonical: url, languages },
+    // A page's `alternates` replaces the layout's, so the feed link is repeated here.
+    alternates: { canonical: url, languages, types: { "application/rss+xml": absoluteUrl(`/${lng}/feed.xml`) } },
     openGraph: {
       title,
       description,

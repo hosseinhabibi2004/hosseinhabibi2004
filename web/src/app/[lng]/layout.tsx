@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     alternates: {
       canonical: absoluteUrl(`/${lng}/`),
       languages: Object.fromEntries(locales.map((l) => [l, absoluteUrl(`/${l}/`)])),
+      types: { "application/rss+xml": absoluteUrl(`/${lng}/feed.xml`) },
     },
   };
 }

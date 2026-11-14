@@ -18,6 +18,12 @@
     "close": "بستن منو"
   },
   "footer": {
-    "attribution": "تصویرسازی از فایل جامعهٔ فیگما «Illustration-Based Portfolio Website Template»"
+    "attribution": "تصویرسازی از فایل جامعهٔ فیگما «Illustration-Based Portfolio Website Template»",
+    "feed": "خوراک RSS"
+  },
+  "notFound": {
+    "title": "صفحه پیدا نشد",
+    "text": "این صفحه وجود ندارد یا جابه‌جا شده است.",
+    "home": "رفتن به صفحهٔ اصلی"
   }
 }

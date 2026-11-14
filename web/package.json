@@ -10,6 +10,7 @@
     "dev": "next dev",
     "prebuild": "[ \"$SKIP_SYNC\" = \"1\" ] || pnpm sync",
     "build": "next build",
+    "postbuild": "tsx scripts/postbuild.ts",
     "lint": "eslint",
     "test": "vitest run",
     "generate:api": "openapi-ts -f openapi-ts.config.ts",

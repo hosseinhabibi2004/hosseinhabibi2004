@@ -2,6 +2,9 @@ import { getT } from "next-i18next/server";
 
 import type { PublicProfile } from "@/lib/content/types";
 
+// Read directly (not through `@/env`): the footer renders in tests without the server env.
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export async function SiteFooter({ lng, profile }: { lng: string; profile: PublicProfile | null }) {
   const { t } = await getT("common", { lng });
   const links = profile?.links ?? [];
@@ -19,6 +22,9 @@ export async function SiteFooter({ lng, profile }: { lng: string; profile: Publi
             ))}
           </ul>
         ) : null}
+        <a href={`${BASE_PATH}/${lng}/feed.xml`} className="text-sm font-semibold hover:underline">
+          {t("footer.feed")}
+        </a>
         <p className="text-sm text-muted-foreground">{t("footer.attribution")}</p>
       </div>
     </footer>
