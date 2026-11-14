@@ -1,0 +1,173 @@
+{
+  "profile": {
+    "name": "Hossein Habibi",
+    "headline": "Software engineer building Django APIs and Next.js sites",
+    "summary": "I design and build web products end to end, from the database to the pixels.",
+    "location": "Tehran, Iran",
+    "email": "hello@hosseinhabibi.dev",
+    "avatar": {
+      "url": "/media/avatar00001.jpg",
+      "width": 512,
+      "height": 512,
+      "alt": "Portrait of Hossein Habibi"
+    },
+    "links": [
+      {
+        "kind": "github",
+        "url": "https://github.com/hosseinhabibi2004"
+      },
+      {
+        "kind": "linkedin",
+        "url": "https://www.linkedin.com/in/hosseinhabibi"
+      }
+    ]
+  },
+  "posts": [
+    {
+      "slug": "notes-on-drf-envelopes",
+      "title": "Notes on DRF response envelopes",
+      "summary": "Wrapping every response in success, message and result.",
+      "published_at": "2026-05-02T09:00:00Z",
+      "cover_image": null,
+      "tags": [
+        {
+          "slug": "django",
+          "name": "Django"
+        }
+      ],
+      "body": "Every response is wrapped.\n\nThe `result` key carries the payload."
+    },
+    {
+      "slug": "building-a-static-portfolio",
+      "title": "Building a static portfolio",
+      "summary": "Why I moved my portfolio to a static export.",
+      "published_at": "2026-03-10T09:00:00Z",
+      "cover_image": {
+        "url": "/media/cover00001.jpg",
+        "width": 1200,
+        "height": 630,
+        "alt": "A laptop showing a portfolio site"
+      },
+      "tags": [
+        {
+          "slug": "nextjs",
+          "name": "Next.js"
+        },
+        {
+          "slug": "django",
+          "name": "Django"
+        }
+      ],
+      "body": "Why I moved my portfolio to a static export, and what it cost.\n\n## The build step\n\n```ts\nexport async function getPosts(lng: string) {\n  return readSnapshot(lng).posts;\n}\n```\n\n| Option | Pros | Cons |\n| --- | --- | --- |\n| Static export | Cheap, fast | Needs a rebuild per change |\n| Server render | Always fresh | Needs a server |\n\n![Build pipeline](/media/pipeline0001.png)\n\n<script>alert(\"x\")</script>\n\nThat is all."
+    }
+  ],
+  "projects": [
+    {
+      "slug": "habibi-portfolio",
+      "title": "Portfolio site",
+      "summary": "This bilingual static site.",
+      "repo_url": "https://github.com/hosseinhabibi2004/hosseinhabibi2004",
+      "live_url": "https://hosseinhabibi.dev",
+      "featured": true,
+      "skills": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS"
+      ],
+      "cover_image": {
+        "url": "/media/project0001.jpg",
+        "width": 1200,
+        "height": 630,
+        "alt": "Screenshot of the portfolio"
+      },
+      "body": "A static export that reads a build-time snapshot.\n\n- Persian and English\n- Light and dark themes"
+    },
+    {
+      "slug": "invoice-api",
+      "title": "Invoice API",
+      "summary": "A small invoicing service.",
+      "repo_url": "https://github.com/hosseinhabibi2004/invoice-api",
+      "live_url": "",
+      "featured": false,
+      "skills": [
+        "Django",
+        "PostgreSQL"
+      ],
+      "cover_image": null,
+      "body": "REST API with an OpenAPI schema and generated clients."
+    }
+  ],
+  "tags": [
+    {
+      "slug": "django",
+      "name": "Django"
+    },
+    {
+      "slug": "nextjs",
+      "name": "Next.js"
+    },
+    {
+      "slug": "unused-tag",
+      "name": "Unused"
+    }
+  ],
+  "skills": [
+    {
+      "title": "Backend",
+      "skills": [
+        {
+          "name": "Python"
+        },
+        {
+          "name": "Django"
+        },
+        {
+          "name": "PostgreSQL"
+        }
+      ]
+    },
+    {
+      "title": "Frontend",
+      "skills": [
+        {
+          "name": "TypeScript"
+        },
+        {
+          "name": "React"
+        },
+        {
+          "name": "Next.js"
+        }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "company": "Acme Software",
+      "company_url": "https://acme.example",
+      "role": "Senior software engineer",
+      "location": "Tehran",
+      "description": "- Led the API platform\n- Cut build times by half",
+      "start_date": "2022-04-01",
+      "end_date": null
+    },
+    {
+      "company": "Pixel Studio",
+      "company_url": "",
+      "role": "Web developer",
+      "location": "Remote",
+      "description": "Built marketing sites and dashboards.",
+      "start_date": "2019-06-01",
+      "end_date": "2022-03-31"
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of Tehran",
+      "degree": "BSc in Computer Engineering",
+      "description": "Focus on distributed systems.",
+      "start_date": "2015-09-01",
+      "end_date": "2019-06-30"
+    }
+  ]
+}

@@ -146,7 +146,7 @@ export type PublicSkillGroupWritable = {
     title: string;
 };
 
-export type EducationRetrieveData = {
+export type EducationListData = {
     body?: never;
     path: {
         locale: string;
@@ -155,21 +155,21 @@ export type EducationRetrieveData = {
     url: '/api/public/{locale}/education/';
 };
 
-export type EducationRetrieveResponses = {
+export type EducationListResponses = {
     200: {
         success: boolean;
         message: string;
         details?: string;
-        result: PublicEducation;
+        result: Array<PublicEducation>;
         meta?: {
             [key: string]: unknown;
         } | null;
     };
 };
 
-export type EducationRetrieveResponse = EducationRetrieveResponses[keyof EducationRetrieveResponses];
+export type EducationListResponse = EducationListResponses[keyof EducationListResponses];
 
-export type ExperienceRetrieveData = {
+export type ExperienceListData = {
     body?: never;
     path: {
         locale: string;
@@ -178,21 +178,21 @@ export type ExperienceRetrieveData = {
     url: '/api/public/{locale}/experience/';
 };
 
-export type ExperienceRetrieveResponses = {
+export type ExperienceListResponses = {
     200: {
         success: boolean;
         message: string;
         details?: string;
-        result: PublicExperience;
+        result: Array<PublicExperience>;
         meta?: {
             [key: string]: unknown;
         } | null;
     };
 };
 
-export type ExperienceRetrieveResponse = ExperienceRetrieveResponses[keyof ExperienceRetrieveResponses];
+export type ExperienceListResponse = ExperienceListResponses[keyof ExperienceListResponses];
 
-export type PostsRetrieveData = {
+export type PostsListData = {
     body?: never;
     path: {
         locale: string;
@@ -201,21 +201,21 @@ export type PostsRetrieveData = {
     url: '/api/public/{locale}/posts/';
 };
 
-export type PostsRetrieveResponses = {
+export type PostsListResponses = {
     200: {
         success: boolean;
         message: string;
         details?: string;
-        result: PublicPostList;
+        result: Array<PublicPostList>;
         meta?: {
             [key: string]: unknown;
         } | null;
     };
 };
 
-export type PostsRetrieveResponse = PostsRetrieveResponses[keyof PostsRetrieveResponses];
+export type PostsListResponse = PostsListResponses[keyof PostsListResponses];
 
-export type PostsRetrieve2Data = {
+export type PostsRetrieveData = {
     body?: never;
     path: {
         locale: string;
@@ -225,7 +225,7 @@ export type PostsRetrieve2Data = {
     url: '/api/public/{locale}/posts/{slug}/';
 };
 
-export type PostsRetrieve2Responses = {
+export type PostsRetrieveResponses = {
     200: {
         success: boolean;
         message: string;
@@ -237,7 +237,7 @@ export type PostsRetrieve2Responses = {
     };
 };
 
-export type PostsRetrieve2Response = PostsRetrieve2Responses[keyof PostsRetrieve2Responses];
+export type PostsRetrieveResponse = PostsRetrieveResponses[keyof PostsRetrieveResponses];
 
 export type ProfileRetrieveData = {
     body?: never;
@@ -262,7 +262,7 @@ export type ProfileRetrieveResponses = {
 
 export type ProfileRetrieveResponse = ProfileRetrieveResponses[keyof ProfileRetrieveResponses];
 
-export type ProjectsRetrieveData = {
+export type ProjectsListData = {
     body?: never;
     path: {
         locale: string;
@@ -271,21 +271,21 @@ export type ProjectsRetrieveData = {
     url: '/api/public/{locale}/projects/';
 };
 
-export type ProjectsRetrieveResponses = {
+export type ProjectsListResponses = {
     200: {
         success: boolean;
         message: string;
         details?: string;
-        result: PublicProjectList;
+        result: Array<PublicProjectList>;
         meta?: {
             [key: string]: unknown;
         } | null;
     };
 };
 
-export type ProjectsRetrieveResponse = ProjectsRetrieveResponses[keyof ProjectsRetrieveResponses];
+export type ProjectsListResponse = ProjectsListResponses[keyof ProjectsListResponses];
 
-export type ProjectsRetrieve2Data = {
+export type ProjectsRetrieveData = {
     body?: never;
     path: {
         locale: string;
@@ -295,7 +295,7 @@ export type ProjectsRetrieve2Data = {
     url: '/api/public/{locale}/projects/{slug}/';
 };
 
-export type ProjectsRetrieve2Responses = {
+export type ProjectsRetrieveResponses = {
     200: {
         success: boolean;
         message: string;
@@ -307,9 +307,9 @@ export type ProjectsRetrieve2Responses = {
     };
 };
 
-export type ProjectsRetrieve2Response = ProjectsRetrieve2Responses[keyof ProjectsRetrieve2Responses];
+export type ProjectsRetrieveResponse = ProjectsRetrieveResponses[keyof ProjectsRetrieveResponses];
 
-export type SkillsRetrieveData = {
+export type SkillsListData = {
     body?: never;
     path: {
         locale: string;
@@ -318,21 +318,21 @@ export type SkillsRetrieveData = {
     url: '/api/public/{locale}/skills/';
 };
 
-export type SkillsRetrieveResponses = {
+export type SkillsListResponses = {
     200: {
         success: boolean;
         message: string;
         details?: string;
-        result: PublicSkillGroup;
+        result: Array<PublicSkillGroup>;
         meta?: {
             [key: string]: unknown;
         } | null;
     };
 };
 
-export type SkillsRetrieveResponse = SkillsRetrieveResponses[keyof SkillsRetrieveResponses];
+export type SkillsListResponse = SkillsListResponses[keyof SkillsListResponses];
 
-export type TagsRetrieveData = {
+export type TagsListData = {
     body?: never;
     path: {
         locale: string;
@@ -341,16 +341,16 @@ export type TagsRetrieveData = {
     url: '/api/public/{locale}/tags/';
 };
 
-export type TagsRetrieveResponses = {
+export type TagsListResponses = {
     200: {
         success: boolean;
         message: string;
         details?: string;
-        result: PublicTag;
+        result: Array<PublicTag>;
         meta?: {
             [key: string]: unknown;
         } | null;
     };
 };
 
-export type TagsRetrieveResponse = TagsRetrieveResponses[keyof TagsRetrieveResponses];
+export type TagsListResponse = TagsListResponses[keyof TagsListResponses];

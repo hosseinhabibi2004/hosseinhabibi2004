@@ -2,7 +2,7 @@
 
 import type { Client, ClientMeta, Options as Options2, RequestResult, TDataShape } from './client';
 import { client } from './client.gen';
-import type { EducationRetrieveData, EducationRetrieveResponses, ExperienceRetrieveData, ExperienceRetrieveResponses, PostsRetrieve2Data, PostsRetrieve2Responses, PostsRetrieveData, PostsRetrieveResponses, ProfileRetrieveData, ProfileRetrieveResponses, ProjectsRetrieve2Data, ProjectsRetrieve2Responses, ProjectsRetrieveData, ProjectsRetrieveResponses, SkillsRetrieveData, SkillsRetrieveResponses, TagsRetrieveData, TagsRetrieveResponses } from './types.gen';
+import type { EducationListData, EducationListResponses, ExperienceListData, ExperienceListResponses, PostsListData, PostsListResponses, PostsRetrieveData, PostsRetrieveResponses, ProfileRetrieveData, ProfileRetrieveResponses, ProjectsListData, ProjectsListResponses, ProjectsRetrieveData, ProjectsRetrieveResponses, SkillsListData, SkillsListResponses, TagsListData, TagsListResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -23,16 +23,24 @@ export class Public {
      * One GET endpoint under `/api/public/<locale>/`. Subclasses name the
      * selector, the serializer, and whether the URL carries a slug.
      */
-    public static educationRetrieve<ThrowOnError extends boolean = false>(options: Options<EducationRetrieveData, ThrowOnError>): RequestResult<EducationRetrieveResponses, unknown, ThrowOnError> {
-        return (options.client ?? client).get<EducationRetrieveResponses, unknown, ThrowOnError>({ url: '/api/public/{locale}/education/', ...options });
+    public static educationList<ThrowOnError extends boolean = false>(options: Options<EducationListData, ThrowOnError>): RequestResult<EducationListResponses, unknown, ThrowOnError> {
+        return (options.client ?? client).get<EducationListResponses, unknown, ThrowOnError>({ url: '/api/public/{locale}/education/', ...options });
     }
     
     /**
      * One GET endpoint under `/api/public/<locale>/`. Subclasses name the
      * selector, the serializer, and whether the URL carries a slug.
      */
-    public static experienceRetrieve<ThrowOnError extends boolean = false>(options: Options<ExperienceRetrieveData, ThrowOnError>): RequestResult<ExperienceRetrieveResponses, unknown, ThrowOnError> {
-        return (options.client ?? client).get<ExperienceRetrieveResponses, unknown, ThrowOnError>({ url: '/api/public/{locale}/experience/', ...options });
+    public static experienceList<ThrowOnError extends boolean = false>(options: Options<ExperienceListData, ThrowOnError>): RequestResult<ExperienceListResponses, unknown, ThrowOnError> {
+        return (options.client ?? client).get<ExperienceListResponses, unknown, ThrowOnError>({ url: '/api/public/{locale}/experience/', ...options });
+    }
+    
+    /**
+     * One GET endpoint under `/api/public/<locale>/`. Subclasses name the
+     * selector, the serializer, and whether the URL carries a slug.
+     */
+    public static postsList<ThrowOnError extends boolean = false>(options: Options<PostsListData, ThrowOnError>): RequestResult<PostsListResponses, unknown, ThrowOnError> {
+        return (options.client ?? client).get<PostsListResponses, unknown, ThrowOnError>({ url: '/api/public/{locale}/posts/', ...options });
     }
     
     /**
@@ -40,15 +48,7 @@ export class Public {
      * selector, the serializer, and whether the URL carries a slug.
      */
     public static postsRetrieve<ThrowOnError extends boolean = false>(options: Options<PostsRetrieveData, ThrowOnError>): RequestResult<PostsRetrieveResponses, unknown, ThrowOnError> {
-        return (options.client ?? client).get<PostsRetrieveResponses, unknown, ThrowOnError>({ url: '/api/public/{locale}/posts/', ...options });
-    }
-    
-    /**
-     * One GET endpoint under `/api/public/<locale>/`. Subclasses name the
-     * selector, the serializer, and whether the URL carries a slug.
-     */
-    public static postsRetrieve2<ThrowOnError extends boolean = false>(options: Options<PostsRetrieve2Data, ThrowOnError>): RequestResult<PostsRetrieve2Responses, unknown, ThrowOnError> {
-        return (options.client ?? client).get<PostsRetrieve2Responses, unknown, ThrowOnError>({ url: '/api/public/{locale}/posts/{slug}/', ...options });
+        return (options.client ?? client).get<PostsRetrieveResponses, unknown, ThrowOnError>({ url: '/api/public/{locale}/posts/{slug}/', ...options });
     }
     
     /**
@@ -63,31 +63,31 @@ export class Public {
      * One GET endpoint under `/api/public/<locale>/`. Subclasses name the
      * selector, the serializer, and whether the URL carries a slug.
      */
+    public static projectsList<ThrowOnError extends boolean = false>(options: Options<ProjectsListData, ThrowOnError>): RequestResult<ProjectsListResponses, unknown, ThrowOnError> {
+        return (options.client ?? client).get<ProjectsListResponses, unknown, ThrowOnError>({ url: '/api/public/{locale}/projects/', ...options });
+    }
+    
+    /**
+     * One GET endpoint under `/api/public/<locale>/`. Subclasses name the
+     * selector, the serializer, and whether the URL carries a slug.
+     */
     public static projectsRetrieve<ThrowOnError extends boolean = false>(options: Options<ProjectsRetrieveData, ThrowOnError>): RequestResult<ProjectsRetrieveResponses, unknown, ThrowOnError> {
-        return (options.client ?? client).get<ProjectsRetrieveResponses, unknown, ThrowOnError>({ url: '/api/public/{locale}/projects/', ...options });
+        return (options.client ?? client).get<ProjectsRetrieveResponses, unknown, ThrowOnError>({ url: '/api/public/{locale}/projects/{slug}/', ...options });
     }
     
     /**
      * One GET endpoint under `/api/public/<locale>/`. Subclasses name the
      * selector, the serializer, and whether the URL carries a slug.
      */
-    public static projectsRetrieve2<ThrowOnError extends boolean = false>(options: Options<ProjectsRetrieve2Data, ThrowOnError>): RequestResult<ProjectsRetrieve2Responses, unknown, ThrowOnError> {
-        return (options.client ?? client).get<ProjectsRetrieve2Responses, unknown, ThrowOnError>({ url: '/api/public/{locale}/projects/{slug}/', ...options });
+    public static skillsList<ThrowOnError extends boolean = false>(options: Options<SkillsListData, ThrowOnError>): RequestResult<SkillsListResponses, unknown, ThrowOnError> {
+        return (options.client ?? client).get<SkillsListResponses, unknown, ThrowOnError>({ url: '/api/public/{locale}/skills/', ...options });
     }
     
     /**
      * One GET endpoint under `/api/public/<locale>/`. Subclasses name the
      * selector, the serializer, and whether the URL carries a slug.
      */
-    public static skillsRetrieve<ThrowOnError extends boolean = false>(options: Options<SkillsRetrieveData, ThrowOnError>): RequestResult<SkillsRetrieveResponses, unknown, ThrowOnError> {
-        return (options.client ?? client).get<SkillsRetrieveResponses, unknown, ThrowOnError>({ url: '/api/public/{locale}/skills/', ...options });
-    }
-    
-    /**
-     * One GET endpoint under `/api/public/<locale>/`. Subclasses name the
-     * selector, the serializer, and whether the URL carries a slug.
-     */
-    public static tagsRetrieve<ThrowOnError extends boolean = false>(options: Options<TagsRetrieveData, ThrowOnError>): RequestResult<TagsRetrieveResponses, unknown, ThrowOnError> {
-        return (options.client ?? client).get<TagsRetrieveResponses, unknown, ThrowOnError>({ url: '/api/public/{locale}/tags/', ...options });
+    public static tagsList<ThrowOnError extends boolean = false>(options: Options<TagsListData, ThrowOnError>): RequestResult<TagsListResponses, unknown, ThrowOnError> {
+        return (options.client ?? client).get<TagsListResponses, unknown, ThrowOnError>({ url: '/api/public/{locale}/tags/', ...options });
     }
 }

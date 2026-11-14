@@ -1,0 +1,87 @@
+{
+  "profile": {
+    "name": "حسین حبیبی",
+    "headline": "مهندس نرم‌افزار؛ طراحی API با جنگو و سایت با نکست",
+    "summary": "محصولات وب را از پایگاه داده تا رابط کاربری طراحی و پیاده‌سازی می‌کنم.",
+    "location": "تهران، ایران",
+    "email": "hello@hosseinhabibi.dev",
+    "avatar": {
+      "url": "/media/avatar00001.jpg",
+      "width": 512,
+      "height": 512,
+      "alt": "تصویر حسین حبیبی"
+    },
+    "links": [
+      {
+        "kind": "github",
+        "url": "https://github.com/hosseinhabibi2004"
+      },
+      {
+        "kind": "linkedin",
+        "url": "https://www.linkedin.com/in/hosseinhabibi"
+      }
+    ]
+  },
+  "posts": [],
+  "projects": [],
+  "tags": [],
+  "skills": [
+    {
+      "title": "بک‌اند",
+      "skills": [
+        {
+          "name": "Python"
+        },
+        {
+          "name": "Django"
+        },
+        {
+          "name": "PostgreSQL"
+        }
+      ]
+    },
+    {
+      "title": "فرانت‌اند",
+      "skills": [
+        {
+          "name": "TypeScript"
+        },
+        {
+          "name": "React"
+        },
+        {
+          "name": "Next.js"
+        }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "company": "اکمی سافتور",
+      "company_url": "https://acme.example",
+      "role": "مهندس ارشد نرم‌افزار",
+      "location": "تهران",
+      "description": "- رهبری پلتفرم API\n- نصف‌کردن زمان ساخت",
+      "start_date": "2022-04-01",
+      "end_date": null
+    },
+    {
+      "company": "پیکسل استودیو",
+      "company_url": "",
+      "role": "توسعه‌دهنده وب",
+      "location": "دورکار",
+      "description": "ساخت سایت‌های معرفی و داشبوردها.",
+      "start_date": "2019-06-01",
+      "end_date": "2022-03-31"
+    }
+  ],
+  "education": [
+    {
+      "institution": "دانشگاه تهران",
+      "degree": "کارشناسی مهندسی کامپیوتر",
+      "description": "گرایش سیستم‌های توزیع‌شده.",
+      "start_date": "2015-09-01",
+      "end_date": "2019-06-30"
+    }
+  ]
+}

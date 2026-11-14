@@ -46,3 +46,7 @@ next-env.d.ts
 # sharing one via git.
 # .claude/CLAUDE.md
 # .claude/settings.local.json
+
+# content snapshot written by `pnpm sync`
+/.content/
+/public/media/

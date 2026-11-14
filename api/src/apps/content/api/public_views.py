@@ -43,6 +43,7 @@ class PublicView(APIView):
         return Response(serializer.data)
 
 
+@extend_schema(responses=ser.PublicPostListSerializer(many=True))
 class PostList(PublicView):
     serializer_class = ser.PublicPostListSerializer
 
@@ -58,6 +59,7 @@ class PostDetail(PublicView):
         return selectors.published_post(locale, slug)
 
 
+@extend_schema(responses=ser.PublicTagSerializer(many=True))
 class TagList(PublicView):
     serializer_class = ser.PublicTagSerializer
 
@@ -65,6 +67,7 @@ class TagList(PublicView):
         return selectors.tags(locale)
 
 
+@extend_schema(responses=ser.PublicProjectListSerializer(many=True))
 class ProjectList(PublicView):
     serializer_class = ser.PublicProjectListSerializer
 
@@ -88,6 +91,7 @@ class ProfileDetail(PublicView):
         return selectors.profile(locale)
 
 
+@extend_schema(responses=ser.PublicSkillGroupSerializer(many=True))
 class SkillList(PublicView):
     serializer_class = ser.PublicSkillGroupSerializer
 
@@ -95,6 +99,7 @@ class SkillList(PublicView):
         return selectors.skill_groups(locale)
 
 
+@extend_schema(responses=ser.PublicExperienceSerializer(many=True))
 class ExperienceList(PublicView):
     serializer_class = ser.PublicExperienceSerializer
 
@@ -102,6 +107,7 @@ class ExperienceList(PublicView):
         return selectors.experience(locale)
 
 
+@extend_schema(responses=ser.PublicEducationSerializer(many=True))
 class EducationList(PublicView):
     serializer_class = ser.PublicEducationSerializer
 

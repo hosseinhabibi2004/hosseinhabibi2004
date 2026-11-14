@@ -1,0 +1,21 @@
+{
+  "generatedAt": "2026-11-13T10:00:00.000Z",
+  "counts": {
+    "en": {
+      "posts": 2,
+      "projects": 2,
+      "tags": 3,
+      "skills": 2,
+      "experience": 2,
+      "education": 1
+    },
+    "fa": {
+      "posts": 1,
+      "projects": 0,
+      "tags": 0,
+      "skills": 2,
+      "experience": 2,
+      "education": 1
+    }
+  }
+}
