@@ -50,7 +50,11 @@ function block(Tag: BlockTag) {
   };
 }
 
-export async function Markdown({
+/**
+ * Renders the Markdown source to a React element. Server pages that own an async render can
+ * `await` this directly instead of suspending on `<Markdown />`.
+ */
+export async function renderMarkdown({
   source,
   copyLabel,
   copiedLabel,
@@ -112,4 +116,8 @@ export async function Markdown({
   });
 
   return <div className="md">{content}</div>;
+}
+
+export async function Markdown(props: MarkdownProps): Promise<ReactElement> {
+  return renderMarkdown(props);
 }

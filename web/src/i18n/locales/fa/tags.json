@@ -1,0 +1,13 @@
+{
+  "title": "برچسب‌ها",
+  "titleLead": "مرور",
+  "metaTitle": "برچسب‌ها",
+  "metaDescription": "نوشته‌ها بر اساس موضوع.",
+  "empty": "هنوز برچسبی وجود ندارد.",
+  "emptyPosts": "نوشته‌ای با این برچسب نیست.",
+  "count_one": "{{count}} نوشته",
+  "count_other": "{{count}} نوشته",
+  "allTags": "همهٔ برچسب‌ها",
+  "tagTitle": "نوشته‌های برچسب {{name}}",
+  "tagDescription": "همهٔ نوشته‌هایی که برچسب {{name}} دارند."
+}

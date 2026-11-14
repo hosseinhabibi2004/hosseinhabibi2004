@@ -1,0 +1,13 @@
+{
+  "title": "Tags",
+  "titleLead": "Browse",
+  "metaTitle": "Tags",
+  "metaDescription": "Posts grouped by topic.",
+  "empty": "No tags yet.",
+  "emptyPosts": "No posts with this tag.",
+  "count_one": "{{count}} post",
+  "count_other": "{{count}} posts",
+  "allTags": "All tags",
+  "tagTitle": "Posts tagged {{name}}",
+  "tagDescription": "All posts tagged {{name}}."
+}

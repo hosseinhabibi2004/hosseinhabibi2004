@@ -1,0 +1,13 @@
+{
+  "title": "Projects",
+  "titleLead": "My",
+  "metaTitle": "Projects",
+  "metaDescription": "Selected projects and the skills behind them.",
+  "empty": "No projects yet.",
+  "emptyHint": "Check back soon.",
+  "back": "All projects",
+  "repo": "Source code",
+  "live": "Live site",
+  "skills": "Built with",
+  "markdown": { "copy": "Copy code", "copied": "Copied" }
+}
