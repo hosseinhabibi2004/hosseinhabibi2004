@@ -39,15 +39,15 @@ stages:                               # per stage, allowed models by difficulty,
   plan_review: { any: [opus, sonnet], cold: true,                           effort: medium }
   tests:       { S: [haiku, sonnet],  M: [sonnet],       L: [opus, sonnet], effort: medium }
   implement:   { S: [haiku, sonnet],  M: [sonnet],       L: [opus, sonnet], effort: medium }
-  root_cause:  { any: [opus],                                               effort: high }
+  root_cause:  { any: [opus, sonnet],                                             effort: high }
   verify:      { any: [haiku, sonnet],                                      effort: low }
   record:      { any: [sonnet, opus],                                       effort: medium }
 
 selection:
-  available: [sonnet, opus]           # only models you can use right now; the rest are skipped
+  available: [haiku, sonnet]          # only models you can use right now; the rest are skipped (opus: never, requester's rule)
   prefer: cheapest                    # cheapest | strongest, among the allowed ones
   escalate_on_failure: true           # same failure twice -> that task moves up one tier
-  max_tier: 3
+  max_tier: 2
   enforcement: stop                   # stop | warn: when the running session model is below what a stage needs
 
 tests:
